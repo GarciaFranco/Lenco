@@ -1,0 +1,45 @@
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.frmAdmin.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.frmLogin.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.frmPrincipal.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.frmProducto.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Properties.Resources.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.csproj.GenerateResource.cache
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.csproj.CoreCompileInputs.cache
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\LenCo.exe.config
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\LenCo.exe
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\LenCo.pdb
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\System.Security.AccessControl.dll
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\System.Security.Permissions.dll
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.dll
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\System.Configuration.ConfigurationManager.xml
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\System.Security.AccessControl.xml
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\System.Security.Permissions.xml
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.xml
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.csprojAssemblyReference.cache
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.csproj.CopyComplete
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.exe
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.pdb
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.csprojAssemblyReference.cache
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.frmAdmin.resources
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.frmAltaProducto.resources
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.frmLogin.resources
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.frmPrincipal.resources
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.frmProducto.resources
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.Properties.Resources.resources
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.csproj.GenerateResource.cache
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.csproj.CoreCompileInputs.cache
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.exe
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.pdb
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\LenCo.exe.config
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\LenCo.exe
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\LenCo.pdb
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.Permissions.dll
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.AccessControl.xml
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.Permissions.xml
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.csproj.CopyComplete
