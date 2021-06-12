@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
+﻿using LenCo.Modelo;
+using System;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
-using LenCo.Modelo;
 
 namespace LenCo
 {
-    class Gestor
+    internal class Gestor
     {
         private SqlConnection cn;
+
+        #region Conexion
+
         private void abrirConexion()
         {
             string cadenaConexion = ConfigurationManager.ConnectionStrings["Cadena"].ConnectionString.ToString();
@@ -22,9 +22,9 @@ namespace LenCo
                 cn.Open();
             }
         }
+
         private void cerrarConexion()
         {
-
             try
             {
                 if (cn != null)
@@ -32,16 +32,20 @@ namespace LenCo
                     cn.Close();
                 }
             }
-            catch (Exception)
-            { 
-                throw;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
-        // ------------------- USUARIOS -------------------
+
+        #endregion Conexion
+
+        #region Usuarios
+
         public bool existeUsuario(string user, string pass)
         {
             bool existe = false;
-            
+
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -71,9 +75,9 @@ namespace LenCo
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
@@ -81,7 +85,11 @@ namespace LenCo
             }
             return existe;
         }
-        // ------------------- PRODUCTOS -------------------
+
+        #endregion Usuarios
+
+        #region Productos
+
         public void cargarProducto(Producto nuevo)
         {
             try
@@ -109,15 +117,16 @@ namespace LenCo
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
                 cerrarConexion();
             }
         }
+
         public void modificarProducto(Producto prod)
         {
             try
@@ -125,7 +134,8 @@ namespace LenCo
                 SqlCommand cmd = new SqlCommand();
 
                 string consulta = @"UPDATE Productos
-                                    SET codigoProv = @codigoProv, idMarca = @idMarca, idRubro = @idRubro, articulo = @articulo, idTalle = @idTalle, idColor = @idColor, idPresentacion = @idPresentacion, descripcion = @descripcion, precioVenta = @precioVenta
+                                    SET codigoProv = @codigoProv, idMarca = @idMarca, idRubro = @idRubro, articulo = @articulo, idTalle = @idTalle,
+                                    idColor = @idColor, idPresentacion = @idPresentacion, descripcion = @descripcion, precioVenta = @precioVenta
                                     WHERE idProducto = @idProducto";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@codigoProv", prod.pCodigoProv);
@@ -146,15 +156,16 @@ namespace LenCo
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
                 cerrarConexion();
             }
         }
+
         public void eliminarProducto(int productoID)
         {
             try
@@ -174,15 +185,182 @@ namespace LenCo
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
                 cerrarConexion();
             }
         }
+
+        public int ultimoIDCargado()
+        {
+            int resultado = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"SELECT MAX(idProducto) 'ID Producto'
+                                    FROM Productos";
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        resultado = dr.GetInt32(0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+
+        public Producto cargarDatosDelProducto(int id)
+        {
+            Producto prod = null;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"SELECT idProducto 'ID', codigoProv 'Cod Producto', descripcion 'Descripcion',  idMarca 'ID Marca', idRubro 'ID Rubro', articulo 'Articulo',  idTalle 'ID Talle', idColor 'ID Color',  idPresentacion 'ID Presentacion',  precioVenta 'Precio Venta'
+                                    FROM Productos
+                                    WHERE idProducto = @idProducto";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idProducto", id);
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+                abrirConexion();
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        Producto p = new Producto();
+                        p.pIdProducto = dr.GetInt32(0);
+                        p.pCodigoProv = dr.GetString(1);
+                        p.pDescripcion = dr.GetString(2);
+                        p.pMarca.pIdMarca = dr.GetInt32(3);
+                        p.pRubro.pIdRubro = dr.GetInt32(4);
+                        p.pArticulo = dr.GetInt32(5);
+                        p.pTalle.pIdTalle = dr.GetInt32(6);
+                        p.pColor.pIdColor = dr.GetInt32(7);
+                        p.pPresent.pIdPresentacion = dr.GetInt32(8);
+                        p.pPrecioVenta = (double)dr.GetDecimal(9);
+                        prod = p;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return prod;
+        }
+
+        public Producto buscarProducto(string codigo)
+        {
+            Producto prod = null;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"SELECT pd.articulo 'Articulo', pd.descripcion 'Descripcion', m.nombre 'Marca', r.nombre 'Rubro', t.nombre 'Talle', c.nombre 'Color',  p.nombre 'Presentacion',  precioVenta 'Precio Venta'
+                                        FROM Productos pd
+                                        JOIN Marcas m ON pd.idMarca = m.idMarca
+                                        JOIN Rubros r ON pd.idRubro = r.idRubro
+                                        JOIN Talles t ON pd.idTalle = t.idTalle
+                                        JOIN Colores c ON pd.idColor = c.idColor
+                                        JOIN Presentaciones p ON pd.idPresentacion = p.idPresentacion
+                                        WHERE codigoProv = @codigoProv";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@codigoProv", codigo);
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                abrirConexion();
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        Producto p = new Producto();
+                        p.pArticulo = dr.GetInt32(0);
+                        p.pDescripcion = dr.GetString(1);
+                        p.pMarca.pNombre = dr.GetString(2);
+                        p.pRubro.pNombre = dr.GetString(3);
+                        p.pTalle.pNombre = dr.GetString(4);
+                        p.pColor.pNombre = dr.GetString(5);
+                        p.pPresent.pNombre = dr.GetString(6);
+                        p.pPrecioVenta = (double)dr.GetDecimal(7);
+                        prod = p;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return prod;
+        }
+
+        public bool existeProducto(string codigo)
+        {
+            bool existe = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "SELECT idProducto FROM Productos WHERE codigoProv = @codigo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+                abrirConexion();
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    existe = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message);
+            }
+            return existe;
+        }
+
+        #endregion Productos
+
+        #region Stocks
+
         public void cargarStocks(Stock stock)
         {
             try
@@ -194,7 +372,7 @@ namespace LenCo
                 cmd.Parameters.AddWithValue("@idSucursal", stock.pIdSucursal);
                 cmd.Parameters.AddWithValue("@idProducto", stock.pIdProducto);
                 cmd.Parameters.AddWithValue("@cantidad", stock.pCantidad);
-            
+
                 abrirConexion();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = consulta;
@@ -202,15 +380,16 @@ namespace LenCo
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
                 cerrarConexion();
             }
         }
+
         public void modificarStock(Stock stock)
         {
             try
@@ -232,15 +411,16 @@ namespace LenCo
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
                 cerrarConexion();
             }
         }
+
         public int verStock(int idProducto, int idSucursal)
         {
             int resultado = 0;
@@ -269,9 +449,9 @@ namespace LenCo
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
@@ -279,6 +459,332 @@ namespace LenCo
             }
             return resultado;
         }
+
+        public int verStock(string codigo, int idSucursal)
+        {
+            int resultado = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"SELECT inv.cantidad 'Stock'
+                                    FROM Productos p
+                                    RIGHT JOIN Inventarios inv ON p.idProducto = inv.idProducto
+                                    RIGHT JOIN Sucursales s ON inv.idSucursal = s.idSucursal
+                                    WHERE p.codigoProv = @codigo and s.idSucursal = @idSucursal";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+                cmd.Parameters.AddWithValue("@idSucursal", idSucursal);
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                abrirConexion();
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        resultado = dr.GetInt32(0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+
+        public bool primeraCarga(int idProducto)
+        {
+            bool resultado = true;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"SELECT DISTINCT idProducto FROM Inventarios WHERE idProducto = @idProducto";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idProducto", idProducto);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    resultado = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+
+        #endregion Stocks
+
+        #region Compras
+
+        public void cargarCompra(Compra nueva)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "INSERT INTO Compras VALUES (@nroComprobante, @fecha_compra, @idProveedor)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nroComprobante", nueva.pNroComprobante);
+                cmd.Parameters.AddWithValue("@fecha_compra", nueva.pFecha_compra);
+                cmd.Parameters.AddWithValue("@idProveedor", nueva.pIdProveedor);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+        }
+
+        public bool existeCompra(int nro, DateTime fecha, int idProv)
+        {
+            bool resultado = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"SELECT * FROM Compras
+                                    WHERE num_comprobante = @nro
+	                                      and fecha_compra = @fecha
+	                                      and idProveedor = @proveedor";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nro", nro);
+                cmd.Parameters.AddWithValue("@fecha", fecha);
+                cmd.Parameters.AddWithValue("@proveedor", idProv);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    resultado = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+
+        public double calcularMontoUltimaCompra()
+        {
+            double total = 0;
+            try
+            {
+                abrirConexion();
+                string consulta = @"SELECT SUM(dc.cantidadUnit* dc.precioUnit) 'Total'
+                                    FROM DetallesCompra dc
+                                    WHERE idCompra = (SELECT MAX(idCompra) FROM DetallesCompra)";
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        double aux = (double)dr.GetDecimal(0);
+                        total = Math.Round(aux, 2);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return total;
+        }
+
+        #endregion Compras
+
+        #region Detalle compras
+
+        public void cargarDetalleCompra(DetalleCompra nuevo)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "INSERT INTO DetallesCompra VALUES (@idProducto, @precio, @cantidad, @idCompra)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idProducto", nuevo.pProducto.pIdProducto);
+                cmd.Parameters.AddWithValue("@precio", nuevo.pPrecioUnit);
+                cmd.Parameters.AddWithValue("@cantidad", nuevo.pCantidadUnit);
+                cmd.Parameters.AddWithValue("@idCompra", nuevo.pCompra.pIdCompra);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+        }
+
+        public bool existeDetalle()
+        {
+            bool resultado = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"SELECT MAX(idDetalleCompra) FROM DetallesCompra";
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        bool c = Convert.ToBoolean(dr.GetInt32(0));
+                        resultado = c;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+
+        #endregion Detalle compras
+
+        #region Ventas
+
+        public void agregarVenta(Venta venta)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "exec InsertarVenta(@fechaVenta,@idSucursal,@montoDescuento,@idFormaPago)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@fechaVenta", venta.pFechaVenta);
+                cmd.Parameters.AddWithValue("@idSucursal", venta.pIdSucursal);
+                cmd.Parameters.AddWithValue("@montoDescuento", venta.pMontoDescuento);
+                cmd.Parameters.AddWithValue("@idFormaPago", venta.pIdformaPago);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+        }
+
+        #endregion Ventas
+
+        #region Detalle ventas
+
+        public void agregarDetalleVenta(DetalleVenta detalle)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "exec InsertarDetalleVenta(@idProducto,@cantidad,@idVenta)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idProducto", detalle.pProducto.pIdProducto);
+                cmd.Parameters.AddWithValue("@cantidad", detalle.pCantidad);
+                cmd.Parameters.AddWithValue("@idVenta", detalle.pVenta.pIdVenta);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+        }
+
+        #endregion Detalle ventas
+
+        #region Metodos genericos
+
         public DataTable mostrarConsulta(string consulta)
         {
             DataTable resultado = new DataTable();
@@ -294,10 +800,9 @@ namespace LenCo
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(resultado);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
@@ -305,7 +810,8 @@ namespace LenCo
             }
             return resultado;
         }
-        public void cargarCombo(ComboBox combo,string nombreTabla)
+
+        public void cargarCombo(ComboBox combo, string nombreTabla)
         {
             string consulta = "SELECT * FROM " + nombreTabla;
             DataTable tabla = mostrarConsulta(consulta);
@@ -315,208 +821,118 @@ namespace LenCo
             combo.DropDownStyle = ComboBoxStyle.DropDownList;
             combo.SelectedIndex = -1;
         }
+
         public void cargarComboModificar(ComboBox combo, string nombreTabla, int id)
         {
             string consulta = "SELECT * FROM " + nombreTabla + " WHERE 1 = " + id;
             DataTable tabla = mostrarConsulta(consulta);
             combo.DataSource = tabla;
-            combo.DisplayMember = tabla.Columns[1].ColumnName; // lo que se visualiza
-            combo.ValueMember = tabla.Columns[0].ColumnName; // lo que se captura
+            combo.DisplayMember = tabla.Columns[1].ColumnName;
+            combo.ValueMember = tabla.Columns[0].ColumnName;
         }
-        //private Marca buscarMarcaPorID(int marcaID)
-        //{
-        //    Marca marca = null;
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
 
-        //        string consulta = "SELECT * FROM Marcas WHERE idMarca = @idMarca";
-        //        cmd.Parameters.Clear();
-        //        cmd.Parameters.AddWithValue("@idMarca", marcaID);
+        public int nuevoID(string columna, string nombreTabla)
+        {
+            int resultado = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
 
-        //        cmd.CommandText = consulta;
+                string consulta = @"SELECT MAX(" + columna + ") 'ID' FROM " + nombreTabla;
 
-        //        abrirConexion();
-        //        cmd.Connection = cn;
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
 
-        //        SqlDataReader dr = cmd.ExecuteReader();
+                cmd.Connection = cn;
 
-        //        if (dr != null)
-        //        {
-        //            if (dr.Read())
-        //            {
-        //                int idMarca = Convert.ToInt32(dr["idMarca"].ToString());
-        //                string nombre = dr["nombre"].ToString();
-        //                marca = new Marca(idMarca, nombre);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
+                SqlDataReader dr = cmd.ExecuteReader();
 
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        cerrarConexion();
-        //    }
-        //    return marca;
-        //}
-        //private Rubro buscarRubroPorID(int rubroID)
-        //{
-        //    Rubro rubro = null;
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        resultado = dr.GetInt32(0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
 
-        //        string consulta = "SELECT * FROM Rubros WHERE idRubro = @idRubro";
-        //        cmd.Parameters.Clear();
-        //        cmd.Parameters.AddWithValue("@idRubro", rubroID);
+        #endregion Metodos genericos
 
-        //        cmd.CommandText = consulta;
+        #region Listados
 
-        //        abrirConexion();
-        //        cmd.Connection = cn;
+        public DataTable listadoCompras()
+        {
+            DataTable resultado = new DataTable();
+            try
+            {
+                abrirConexion();
 
-        //        SqlDataReader dr = cmd.ExecuteReader();
+                string consulta = @"SELECT co.num_comprobante 'N° Comprobante', co.fecha_compra 'Fecha', pr.nombre 'Proveedor', SUM(dc.cantidadUnit*dc.precioUnit) 'Total de la compra'
+                                    FROM Compras co
+                                    JOIN DetallesCompra dc ON co.idCompra = dc.idCompra
+                                    JOIN Proveedores pr ON pr.idProveedor = co.idProveedor
+                                    GROUP BY co.num_comprobante, co.fecha_compra, pr.nombre";
+                SqlCommand cmd = new SqlCommand();
 
-        //        if (dr != null)
-        //        {
-        //            if (dr.Read())
-        //            {
-        //                int idRubro = Convert.ToInt32(dr["idRubro"].ToString());
-        //                string nombre = dr["nombre"].ToString();
-        //                rubro = new Rubro(idRubro, nombre);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
 
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        cerrarConexion();
-        //    }
-        //    return rubro;
-        //}
-        //private Talle buscarTallePorID(int talleID)
-        //{
-        //    Talle talle = null;
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
 
-        //        string consulta = "SELECT * FROM Talles WHERE idTalle = @idTalle";
-        //        cmd.Parameters.Clear();
-        //        cmd.Parameters.AddWithValue("@idTalle", talleID);
+        public DataTable listadoDetalleCompras()
+        {
+            DataTable resultado = new DataTable();
+            try
+            {
+                abrirConexion();
 
-        //        cmd.CommandText = consulta;
+                string consulta = @"SELECT pd.articulo 'Articulo', pd.descripcion 'Descripcion', dc.cantidadUnit 'Cantidad', dc.precioUnit 'Precio de compra', (dc.cantidadUnit * dc.precioUnit) 'Subtotal'
+                                    FROM Productos pd
+                                    JOIN DetallesCompra dc ON pd.idProducto = dc.idProducto
+                                    JOIN Compras c ON c.idCompra = dc.idCompra
+                                    WHERE c.idCompra = (SELECT MAX(IdCompra) From Compras)";
+                SqlCommand cmd = new SqlCommand();
 
-        //        abrirConexion();
-        //        cmd.Connection = cn;
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
 
-        //        SqlDataReader dr = cmd.ExecuteReader();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
 
-        //        if (dr != null)
-        //        {
-        //            if (dr.Read())
-        //            {
-        //                int idTalle = Convert.ToInt32(dr["idTalle"].ToString());
-        //                string nombre = dr["nombre"].ToString();
-        //                talle = new Talle(idTalle, nombre);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        cerrarConexion();
-        //    }
-        //    return talle;
-        //}
-        //private Presentacion buscarPresentacionPorID(int presentID)
-        //{
-        //    Presentacion present = null;
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
-
-        //        string consulta = "SELECT * FROM Presentaciones WHERE idPresentacion = @idPresentacion";
-        //        cmd.Parameters.Clear();
-        //        cmd.Parameters.AddWithValue("@idPresentacion", presentID);
-
-        //        cmd.CommandText = consulta;
-
-        //        abrirConexion();
-        //        cmd.Connection = cn;
-
-        //        SqlDataReader dr = cmd.ExecuteReader();
-
-        //        if (dr != null)
-        //        {
-        //            if (dr.Read())
-        //            {
-        //                int idPresentacion = Convert.ToInt32(dr["idPresentacion"].ToString());
-        //                string nombre = dr["nombre"].ToString();
-        //                present = new Presentacion(idPresentacion, nombre);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        cerrarConexion();
-        //    }
-        //    return present;
-        //}
-        //private Color buscarColorPorID(int colorID)
-        //{
-        //    Color color = null;
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
-
-        //        string consulta = "SELECT * FROM Colores WHERE idColor = @idColor";
-        //        cmd.Parameters.Clear();
-        //        cmd.Parameters.AddWithValue("@idColor", colorID);
-
-        //        cmd.CommandText = consulta;
-
-        //        abrirConexion();
-        //        cmd.Connection = cn;
-
-        //        SqlDataReader dr = cmd.ExecuteReader();
-
-        //        if (dr != null)
-        //        {
-        //            if (dr.Read())
-        //            {
-        //                int idColor = Convert.ToInt32(dr["idColor"].ToString());
-        //                string nombre = dr["nombre"].ToString();
-        //                color = new Color(idColor,nombre);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        cerrarConexion();
-        //    }
-        //    return color;
-        //}
+        #endregion Listados
     }
 }

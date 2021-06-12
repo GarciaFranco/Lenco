@@ -121,6 +121,20 @@
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnSalir.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAbCAYAAACJISRoAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHZSURBVEhLtZbNK0RRGIcPZcNCVkqxRT5KWVhYyZYS
+        iqUFS8rHhqWNP8DC9x9AYSkLW8mSErFgq5SsfPs9t/NOM7pz79xxPPV0es9539+ZcucOl5EB+ejXf2NT
+        fvs1GLVyUjZHlXPbkktYoVVOSfoyUykX5bMk9ETCmqRmBfap6aOfuZJokVeSYXNawoakZoUZmd/HHPOJ
+        9MovaUPLsloaW5J9VoNz+myGeXJi6ZBvksYHGfeJ4i4x6GeOc3LIK6BCnksa7mW9jCPpEmDOLiKvgCXJ
+        AXazUYS0S4B5yyI3okba7StsJFDKJUAOfeSS78b9xqdsZCOBHUkvaxJN0h6gMTZscI8ihSzfePJyH+jS
+        F3MUKQzJF7+mMS/JvaBgiCL0S488csl3r77oowgIeeSS7558MUwRkBFJLvnuzBe5ZzoQ9t0j36374pgi
+        IOSRS74b9AV2shEAciyT/AgeMzZC/eLZmyF6fI0JaTfzB/sLo9KyyC3gUHLwLnvYKAPmmCfngI3f1Mk7
+        ScOH5J2WBfqZY54c8mJpkLeSRjySXTIJzumzGebJSaRK7kobwmu5Kmcl/72wUt/I/D7mmC+Zfnkq80OK
+        SR/9ZdMuF+S+5CeVtzYrNfttMgHnfgBS+qznEghjCAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="btnLogout.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m

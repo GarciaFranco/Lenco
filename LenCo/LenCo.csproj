@@ -66,12 +66,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modelo\Color.cs" />
+    <Compile Include="Modelo\Compra.cs" />
+    <Compile Include="Modelo\DetalleCompra.cs" />
+    <Compile Include="Modelo\DetalleVenta.cs" />
     <Compile Include="Modelo\Stock.cs" />
-    <Compile Include="Vista\frmAdmin.cs">
+    <Compile Include="Modelo\Venta.cs" />
+    <Compile Include="Vista\frmVenta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vista\frmAdmin.Designer.cs">
-      <DependentUpon>frmAdmin.cs</DependentUpon>
+    <Compile Include="Vista\frmVenta.Designer.cs">
+      <DependentUpon>frmVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmAltaProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmAltaProducto.Designer.cs">
+      <DependentUpon>frmAltaProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmCompra.Designer.cs">
+      <DependentUpon>frmCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmDetalleCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmDetalleCompra.Designer.cs">
+      <DependentUpon>frmDetalleCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\frmLogin.cs">
       <SubType>Form</SubType>
@@ -100,8 +122,17 @@
     <Compile Include="Modelo\Rubro.cs" />
     <Compile Include="Modelo\Talle.cs" />
     <Compile Include="Modelo\Usuario.cs" />
-    <EmbeddedResource Include="Vista\frmAdmin.resx">
-      <DependentUpon>frmAdmin.cs</DependentUpon>
+    <EmbeddedResource Include="Vista\frmVenta.resx">
+      <DependentUpon>frmVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmAltaProducto.resx">
+      <DependentUpon>frmAltaProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmCompra.resx">
+      <DependentUpon>frmCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmDetalleCompra.resx">
+      <DependentUpon>frmDetalleCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -122,6 +153,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\LenCo.Modelo.DetalleCompra.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

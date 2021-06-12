@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LenCo.Modelo
+﻿namespace LenCo.Modelo
 {
-    class Stock
+    public class Stock
     {
         private int idStock;
         private int idSucursal;
@@ -18,6 +12,14 @@ namespace LenCo.Modelo
             this.idSucursal = idSucursal;
             this.idProducto = idProducto;
             this.cantidad = cantidad;
+        }
+
+        public Stock()
+        {
+            this.idProducto = 0;
+            this.idStock = 0;
+            this.cantidad = 0;
+            this.idSucursal = 0;
         }
 
         public int pIdStock { get => idStock; set => idStock = value; }

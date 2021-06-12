@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LenCo.Modelo;
+using System;
 using System.Windows.Forms;
 
-namespace LenCo
+namespace LenCo.Vista
 {
     public partial class frmPrincipal : Form
     {
@@ -16,35 +10,28 @@ namespace LenCo
         {
             InitializeComponent();
             cargarUserLog();
+            habilitarSubMenu(false);
         }
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-            abrirFormPanel(new frmAdmin());
+            habilitarSubMenu(true);
         }
+
         private void btnProductos_Click(object sender, EventArgs e)
         {
             abrirFormPanel(new frmProducto());
         }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Estas seguro de que quieres cerrar sesión?", "warning", 
+            if (MessageBox.Show("Estas seguro de que quieres cerrar sesión?", "warning",
                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 this.Close();
             }
-                
         }
 
-        private void frmPrincipal_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (MessageBox.Show("Estas seguro de que quieres salir?", "warning",
-               MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-                
-        }
         private void abrirFormPanel(object formPanel)
         {
             if (this.panelContenedor.Controls.Count > 0)
@@ -56,6 +43,7 @@ namespace LenCo
             this.panelContenedor.Tag = fp;
             fp.Show();
         }
+
         private void cargarUserLog()
         {
             lblUsuarioLog.Text = "Bienvenido " + Usuario.pUsuario + "!";
@@ -63,6 +51,50 @@ namespace LenCo
             {
                 btnAdmin.Visible = false;
             }
+            else
+            {
+                btnProductos.Visible = false;
+                btnVentas.Visible = false;
+                btnDevoluc.Visible = false;
+            }
+        }
+
+        private void btnAdmProductos_Click(object sender, EventArgs e)
+        {
+            abrirFormPanel(new frmProducto());
+            habilitarSubMenu(false);
+        }
+
+        private void habilitarSubMenu(bool x)
+        {
+            panelSubMenu.Visible = x;
+        }
+
+        private void btnAdmCompras_Click(object sender, EventArgs e)
+        {
+            abrirFormPanel(new frmCompra());
+            habilitarSubMenu(false);
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Estas seguro de que quieres salir?", "warning",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void btnAdmVentas_Click(object sender, EventArgs e)
+        {
+            abrirFormPanel(new frmVenta());
+            habilitarSubMenu(false);
+        }
+
+        private void btnVentas_Click(object sender, EventArgs e)
+        {
+            abrirFormPanel(new frmVenta());
+            habilitarSubMenu(false);
         }
     }
 }

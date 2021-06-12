@@ -1,6 +1,4 @@
-D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.frmAdmin.resources
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.frmLogin.resources
-D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.frmPrincipal.resources
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.frmProducto.resources
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Properties.Resources.resources
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.csproj.GenerateResource.cache
@@ -43,3 +41,8 @@ C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.AccessControl.x
 C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.Permissions.xml
 C:\Users\Franco\Desktop\PS\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.xml
 C:\Users\Franco\Desktop\PS\LenCo\LenCo\obj\Debug\LenCo.csproj.CopyComplete
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmCompra.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmDetalleCompra.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmAltaProducto.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmPrincipal.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmVenta.resources

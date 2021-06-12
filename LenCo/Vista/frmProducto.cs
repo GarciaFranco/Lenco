@@ -1,19 +1,14 @@
 ﻿using LenCo.Modelo;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LenCo
 {
     public partial class frmProducto : Form
     {
-        bool accModificar = false;
+        private bool accModificar = false;
+
         public frmProducto()
         {
             InitializeComponent();
@@ -21,12 +16,14 @@ namespace LenCo
             cargarCombos();
             ocultarBotones(true);
         }
+
         private void btnAlta_Click(object sender, EventArgs e)
         {
             limpiar();
             ocultarBotones(false);
             gbStock.Visible = false;
         }
+
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (dgvProductos.SelectedRows.Count > 0)
@@ -34,17 +31,17 @@ namespace LenCo
                 accModificar = true;
                 gbProducto.Enabled = true;
                 gbProducto.Visible = true;
-                gbStock.Visible = false;
+                gbStock.Visible = true;
                 cargarDatosAmodificar();
             }
             else
             {
-                MessageBox.Show("Debes seleccionar una fila para modificar.");
+                msg("Debes seleccionar una fila para modificar.");
             }
         }
+
         private void btnCargar_Click(object sender, EventArgs e)
         {
-
             Gestor gestor = new Gestor();
             try
             {
@@ -79,8 +76,8 @@ namespace LenCo
                     gestor.cargarProducto(cargado);
                     if (cargado != null)
                     {
-                        msg("Producto cargado con exito.");
                         limpiar();
+                        msg("Producto cargado con exito.");
                     }
                 }
                 else
@@ -92,8 +89,8 @@ namespace LenCo
                     gestor.modificarProducto(modificado);
                     if (modificado != null)
                     {
-                        msg("Producto modificado con exito.");
                         limpiar();
+                        msg("Producto modificado con exito.");
                         ocultarBotones(true);
                         accModificar = false;
                     }
@@ -105,8 +102,6 @@ namespace LenCo
                 msg("Hubo un error: " + ex);
             }
         }
-
-
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -121,6 +116,7 @@ namespace LenCo
                         int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID"].Value.ToString());
                         gestor.eliminarProducto(idProducto);
                         msg("Producto eliminado con exito");
+                        limpiar();
                         cargarListas();
                     }
                     catch (Exception ex)
@@ -131,9 +127,10 @@ namespace LenCo
             }
             else
             {
-                MessageBox.Show("Debes seleccionar una fila para modificar.");
+                msg("Debes seleccionar una fila para eliminar.");
             }
         }
+
         private void btnCargarStock_Click(object sender, EventArgs e)
         {
             int stockN1 = Convert.ToInt32(txtStockN1.Text);
@@ -148,18 +145,20 @@ namespace LenCo
 
             Gestor gestor = new Gestor();
             if (string.IsNullOrEmpty(vacioStock) && string.IsNullOrEmpty(vacioSuc))
-            { 
+            {
                 gestor.cargarStocks(stockSucursal1);
                 gestor.cargarStocks(stockSucural2);
+                limpiar();
             }
             else
             {
                 gestor.modificarStock(stockSucursal1);
                 gestor.modificarStock(stockSucural2);
- 
+                limpiar();
             }
             cargarListas();
         }
+
         private void limpiar()
         {
             txtArticulo.Clear();
@@ -173,6 +172,7 @@ namespace LenCo
             rbIndividual.Checked = false;
             rbPack.Checked = false;
         }
+
         private void cargarCombos()
         {
             Gestor gestor = new Gestor();
@@ -181,24 +181,25 @@ namespace LenCo
             gestor.cargarCombo(cbRubro, "Rubros");
             gestor.cargarCombo(cbTalle, "Talles");
         }
+
         private void cargarDatosAmodificar()
         {
             Gestor gestor = new Gestor();
-            // DATOS DEL PRODUCTO 
+
+            int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID"].Value.ToString());
+
+            Producto producto = gestor.cargarDatosDelProducto(idProducto);
             cargarCombos();
-            txtArticulo.Text = dgvProductos.CurrentRow.Cells["Articulo"].Value.ToString();
-            int talle = Convert.ToInt32(dgvProductos.CurrentRow.Cells["Talle"].Value.ToString());
-            cbTalle.SelectedValue = talle;
-            int marca = Convert.ToInt32(dgvProductos.CurrentRow.Cells["MarcaID"].Value.ToString());
-            cbMarca.SelectedValue = marca;
-            int rubro = Convert.ToInt32(dgvProductos.CurrentRow.Cells["Rubro"].Value.ToString());
-            cbRubro.SelectedValue = rubro;
-            int color = Convert.ToInt32(dgvProductos.CurrentRow.Cells["Color"].Value.ToString());
-            cbColor.SelectedValue = color;
-            txtCodigo.Text = dgvProductos.CurrentRow.Cells["Cod Producto"].Value.ToString();
-            txtPrecio.Text = dgvProductos.CurrentRow.Cells["Precio"].Value.ToString();
-            txtDescrip.Text = dgvProductos.CurrentRow.Cells["Descripcion"].Value.ToString();
-            if (dgvProductos.CurrentRow.Cells["Presentacion"].Value.ToString() == "Individual")
+            txtArticulo.Text = producto.pArticulo.ToString();
+            txtCodigo.Text = producto.pCodigoProv;
+            txtPrecio.Text = producto.pPrecioVenta.ToString();
+            txtDescrip.Text = producto.pDescripcion;
+            cbRubro.SelectedValue = producto.pRubro.pIdRubro;
+            cbMarca.SelectedValue = producto.pMarca.pIdMarca;
+            cbTalle.SelectedValue = producto.pTalle.pIdTalle;
+            cbColor.SelectedValue = producto.pColor.pIdColor;
+
+            if (producto.pPresent.pIdPresentacion == 1)
             {
                 rbIndividual.Select();
             }
@@ -206,7 +207,15 @@ namespace LenCo
             {
                 rbPack.Select();
             }
+            int cantStockSuc1 = gestor.verStock(idProducto, 1);
+            int cantStockSuc2 = gestor.verStock(idProducto, 2);
+            int cantStockAlmacen = gestor.verStock(idProducto, 3);
+
+            txtStockN1.Text = cantStockSuc1.ToString();
+            txtStockN2.Text = cantStockSuc2.ToString();
+            txtStockAlmacen.Text = cantStockAlmacen.ToString();
         }
+
         private void cargarListas()
         {
             Gestor gestor = new Gestor();
@@ -216,29 +225,6 @@ namespace LenCo
             dgvProductos.DataSource = productos;
             ocultarInfoData();
         }
-        private void btnEditarStock_Click(object sender, EventArgs e)
-        {
-            if (dgvProductos.SelectedRows.Count > 0)
-            {
-                cargarDatosAmodificar();
-                gbProducto.Visible = true;
-                gbProducto.Enabled = false;
-                gbStock.Visible = true;
-                int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID"].Value.ToString());
-
-                Gestor gestor = new Gestor();
-
-                int stock1 = gestor.verStock(idProducto, 1);
-                int stock2 = gestor.verStock(idProducto, 2);
-
-                txtStockN1.Text = Convert.ToString(stock1);
-                txtStockN2.Text = Convert.ToString(stock2);
-            }
-            else
-            {
-                MessageBox.Show("Debes seleccionar una fila para modificar.");
-            }
-        }
 
         private void ocultarBotones(bool x)
         {
@@ -246,11 +232,11 @@ namespace LenCo
             gbStock.Visible = !x;
             if (Usuario.pIdRol > 1)
             {
-                btnAlta.Visible = false;
                 btnModificar.Visible = false;
                 btnEliminar.Visible = false;
             }
         }
+
         private void ocultarInfoData()
         {
             dgvProductos.Columns["ID"].Visible = false;
@@ -259,9 +245,38 @@ namespace LenCo
             dgvProductos.Columns["Rubro"].Visible = false;
             dgvProductos.Columns["MarcaID"].Visible = false;
         }
+
         private void msg(string msg)
         {
             MessageBox.Show(msg);
         }
+
+        /* BOTON MODIFICAR ELIMINADO.
+         * REALIZAR GESTIONAMIENTO DE STOCK DESDE EL BOTON MODIFICAR
+         * CONSULTAR STOCK DEL PRODUCTO */
+
+        //private void btnEditarStock_Click(object sender, EventArgs e)
+        //{
+        //    if (dgvProductos.SelectedRows.Count > 0)
+        //    {
+        //        cargarDatosAmodificar();
+        //        gbProducto.Visible = true;
+        //        gbProducto.Enabled = false;
+        //        gbStock.Visible = true;
+        //        int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID"].Value.ToString());
+
+        //        Gestor gestor = new Gestor();
+
+        //        int stock1 = gestor.verStock(idProducto, 1);
+        //        int stock2 = gestor.verStock(idProducto, 2);
+
+        //        txtStockN1.Text = Convert.ToString(stock1);
+        //        txtStockN2.Text = Convert.ToString(stock2);
+        //    }
+        //    else
+        //    {
+        //        msg("Debes seleccionar una fila para modificar el stock.");
+        //    }
+        //}
     }
 }

@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LenCo
+﻿namespace LenCo.Modelo
 {
-    class Marca
+    public class Marca
     {
         private int idMarca;
         private string nombre;
-
 
         public Marca(int idMarca, string nombre)
         {
             this.idMarca = idMarca;
             this.nombre = nombre;
         }
+
         public Marca(int idMarca)
         {
             this.idMarca = idMarca;
+        }
+
+        public Marca()
+        {
+            this.idMarca = 0;
+            this.nombre = "";
         }
 
         public int pIdMarca { get => idMarca; set => idMarca = value; }

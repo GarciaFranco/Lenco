@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LenCo
+﻿namespace LenCo.Modelo
 {
-    class Producto
+    public class Producto
     {
         private int idProducto;
         private string codigoProv;
@@ -20,7 +14,7 @@ namespace LenCo
         private double precioVenta;
         private bool activo;
 
-        public Producto(int idProducto, string codigoProv, Marca marca, Rubro rubro, int articulo, Talle talle, 
+        public Producto(int idProducto, string codigoProv, Marca marca, Rubro rubro, int articulo, Talle talle,
                        Color color, Presentacion present, string descripcion, double precioVenta, bool activo)
         {
             this.idProducto = idProducto;
@@ -36,6 +30,11 @@ namespace LenCo
             this.activo = activo;
         }
 
+        public Producto(int idProducto)
+        {
+            this.idProducto = idProducto;
+        }
+
         public Producto(int idProducto, string codigoProv, Marca marca, int articulo, Presentacion present, string descripcion, double precioVenta)
         {
             this.idProducto = idProducto;
@@ -45,6 +44,21 @@ namespace LenCo
             this.present = present;
             this.descripcion = descripcion;
             this.precioVenta = precioVenta;
+        }
+
+        public Producto()
+        {
+            this.idProducto = 0;
+            this.codigoProv = "";
+            this.marca = new Marca();
+            this.rubro = new Rubro();
+            this.articulo = 0;
+            this.talle = new Talle();
+            this.color = new Color();
+            this.present = new Presentacion();
+            this.descripcion = "";
+            this.precioVenta = 0;
+            this.activo = true;
         }
 
         public int pIdProducto { get => idProducto; set => idProducto = value; }

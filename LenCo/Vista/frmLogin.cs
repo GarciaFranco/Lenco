@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LenCo.Vista;
+using System;
 using System.Windows.Forms;
 
 namespace LenCo
@@ -27,7 +21,7 @@ namespace LenCo
 
             if (!string.IsNullOrEmpty(usuario) || !string.IsNullOrEmpty(usuario))
             {
-                if (gestor.existeUsuario(usuario,password))
+                if (gestor.existeUsuario(usuario, password))
                 {
                     frmPrincipal principal = new frmPrincipal();
                     principal.Show();
@@ -45,16 +39,19 @@ namespace LenCo
             }
             limpiarCampos();
         }
+
         private void msgError(string msg)
         {
             lblMsgError.Text = msg;
             lblMsgError.Visible = true;
         }
+
         private void limpiarCampos()
         {
             txtUser.Clear();
             txtPassword.Clear();
         }
+
         private void Logout(object sender, FormClosedEventArgs e)
         {
             limpiarCampos();

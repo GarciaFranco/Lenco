@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LenCo
+﻿namespace LenCo.Modelo
 {
-    class Color
+    public class Color
     {
         private int idColor;
         private string nombre;
-
 
         public Color(int idColor, string nombre)
         {
@@ -21,6 +14,12 @@ namespace LenCo
         public Color(int idColor)
         {
             this.idColor = idColor;
+        }
+
+        public Color()
+        {
+            this.idColor = 0;
+            this.pNombre = "";
         }
 
         public int pIdColor { get => idColor; set => idColor = value; }
