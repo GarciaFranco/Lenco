@@ -157,6 +157,7 @@ namespace LenCo
                 limpiar();
             }
             cargarListas();
+            gbProducto.Visible = false;
         }
 
         private void limpiar()
@@ -171,6 +172,9 @@ namespace LenCo
             cbRubro.SelectedIndex = -1;
             rbIndividual.Checked = false;
             rbPack.Checked = false;
+            txtStockAlmacen.Clear();
+            txtStockN1.Clear();
+            txtStockN2.Clear();
         }
 
         private void cargarCombos()
@@ -223,7 +227,11 @@ namespace LenCo
 
             DataTable productos = gestor.mostrarConsulta(sql);
             dgvProductos.DataSource = productos;
+            dgvProductos.Columns["Precio"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             ocultarInfoData();
+
+            DataTable reporte = gestor.listadosStockBajo();
+            dgvReportePocoStock.DataSource = reporte;
         }
 
         private void ocultarBotones(bool x)

@@ -30,6 +30,7 @@ namespace LenCo.Vista
         private void InitializeComponent()
         {
             this.dgvDetalleVenta = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descrip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,8 +55,6 @@ namespace LenCo.Vista
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.gbRegistroVenta = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cbInteres = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cbFormaPago = new System.Windows.Forms.ComboBox();
             this.chkDescuento = new System.Windows.Forms.CheckBox();
@@ -78,6 +77,7 @@ namespace LenCo.Vista
             this.dgvDetalleVenta.ColumnHeadersHeight = 30;
             this.dgvDetalleVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDetalleVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
             this.articulo,
             this.descrip,
             this.marca,
@@ -98,6 +98,12 @@ namespace LenCo.Vista
             this.dgvDetalleVenta.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvDetalleVenta_RowsAdded);
             this.dgvDetalleVenta.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvDetalleVenta_RowsRemoved);
             this.dgvDetalleVenta.SelectionChanged += new System.EventHandler(this.dgvDetalleVenta_SelectionChanged);
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
             // 
             // articulo
             // 
@@ -251,6 +257,7 @@ namespace LenCo.Vista
             // 
             // dgvVentasDiarias
             // 
+            this.dgvVentasDiarias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVentasDiarias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVentasDiarias.Location = new System.Drawing.Point(31, 314);
             this.dgvVentasDiarias.Name = "dgvVentasDiarias";
@@ -317,8 +324,6 @@ namespace LenCo.Vista
             // 
             // gbRegistroVenta
             // 
-            this.gbRegistroVenta.Controls.Add(this.label8);
-            this.gbRegistroVenta.Controls.Add(this.cbInteres);
             this.gbRegistroVenta.Controls.Add(this.label7);
             this.gbRegistroVenta.Controls.Add(this.cbFormaPago);
             this.gbRegistroVenta.Controls.Add(this.chkDescuento);
@@ -333,35 +338,11 @@ namespace LenCo.Vista
             this.gbRegistroVenta.TabIndex = 92;
             this.gbRegistroVenta.TabStop = false;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(680, 30);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(61, 19);
-            this.label8.TabIndex = 101;
-            this.label8.Text = "Interes";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // cbInteres
-            // 
-            this.cbInteres.AutoCompleteCustomSource.AddRange(new string[] {
-            "0",
-            "10",
-            "15"});
-            this.cbInteres.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbInteres.FormattingEnabled = true;
-            this.cbInteres.Location = new System.Drawing.Point(747, 25);
-            this.cbInteres.Name = "cbInteres";
-            this.cbInteres.Size = new System.Drawing.Size(54, 28);
-            this.cbInteres.TabIndex = 100;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(413, 30);
+            this.label7.Location = new System.Drawing.Point(434, 30);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(125, 19);
             this.label7.TabIndex = 99;
@@ -372,33 +353,34 @@ namespace LenCo.Vista
             // 
             this.cbFormaPago.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFormaPago.FormattingEnabled = true;
-            this.cbFormaPago.Location = new System.Drawing.Point(544, 25);
+            this.cbFormaPago.Location = new System.Drawing.Point(565, 25);
             this.cbFormaPago.Name = "cbFormaPago";
-            this.cbFormaPago.Size = new System.Drawing.Size(121, 28);
+            this.cbFormaPago.Size = new System.Drawing.Size(181, 28);
             this.cbFormaPago.TabIndex = 98;
             // 
             // chkDescuento
             // 
             this.chkDescuento.AutoSize = true;
-            this.chkDescuento.Location = new System.Drawing.Point(208, 32);
+            this.chkDescuento.Location = new System.Drawing.Point(229, 32);
             this.chkDescuento.Name = "chkDescuento";
             this.chkDescuento.Size = new System.Drawing.Size(15, 14);
             this.chkDescuento.TabIndex = 97;
             this.chkDescuento.UseVisualStyleBackColor = true;
+            this.chkDescuento.CheckedChanged += new System.EventHandler(this.chkDescuento_CheckedChanged);
             // 
             // txtDescuento
             // 
             this.txtDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescuento.Location = new System.Drawing.Point(346, 26);
+            this.txtDescuento.Location = new System.Drawing.Point(367, 26);
             this.txtDescuento.Name = "txtDescuento";
-            this.txtDescuento.Size = new System.Drawing.Size(56, 26);
+            this.txtDescuento.Size = new System.Drawing.Size(45, 26);
             this.txtDescuento.TabIndex = 96;
             // 
             // lblDescuento
             // 
             this.lblDescuento.AutoSize = true;
             this.lblDescuento.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescuento.Location = new System.Drawing.Point(229, 30);
+            this.lblDescuento.Location = new System.Drawing.Point(250, 30);
             this.lblDescuento.Name = "lblDescuento";
             this.lblDescuento.Size = new System.Drawing.Size(111, 19);
             this.lblDescuento.TabIndex = 95;
@@ -410,7 +392,7 @@ namespace LenCo.Vista
             this.lblMontoVta.AutoSize = true;
             this.lblMontoVta.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMontoVta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblMontoVta.Location = new System.Drawing.Point(97, 23);
+            this.lblMontoVta.Location = new System.Drawing.Point(118, 23);
             this.lblMontoVta.Name = "lblMontoVta";
             this.lblMontoVta.Size = new System.Drawing.Size(30, 32);
             this.lblMontoVta.TabIndex = 94;
@@ -421,7 +403,7 @@ namespace LenCo.Vista
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(15, 30);
+            this.label4.Location = new System.Drawing.Point(36, 30);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 19);
             this.label4.TabIndex = 93;
@@ -474,6 +456,15 @@ namespace LenCo.Vista
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Label lblMaxCant;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox gbRegistroVenta;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbFormaPago;
+        private System.Windows.Forms.CheckBox chkDescuento;
+        private System.Windows.Forms.TextBox txtDescuento;
+        private System.Windows.Forms.Label lblDescuento;
+        private System.Windows.Forms.Label lblMontoVta;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn articulo;
         private System.Windows.Forms.DataGridViewTextBoxColumn descrip;
         private System.Windows.Forms.DataGridViewTextBoxColumn marca;
@@ -482,15 +473,5 @@ namespace LenCo.Vista
         private System.Windows.Forms.DataGridViewTextBoxColumn color;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioVenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.GroupBox gbRegistroVenta;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cbInteres;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cbFormaPago;
-        private System.Windows.Forms.CheckBox chkDescuento;
-        private System.Windows.Forms.TextBox txtDescuento;
-        private System.Windows.Forms.Label lblDescuento;
-        private System.Windows.Forms.Label lblMontoVta;
-        private System.Windows.Forms.Label label4;
     }
 }

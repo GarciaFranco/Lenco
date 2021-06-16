@@ -80,6 +80,8 @@ namespace LenCo.Vista
             Gestor gestor = new Gestor();
             DataTable dt = gestor.listadoDetalleCompras();
             dgvDetalleCompra.DataSource = dt;
+            dgvDetalleCompra.Columns["Precio"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDetalleCompra.Columns["Subtotal"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void cargarCompras()
@@ -87,6 +89,7 @@ namespace LenCo.Vista
             Gestor gestor = new Gestor();
             DataTable dt = gestor.listadoCompras();
             dgvCompras.DataSource = dt;
+            dgvCompras.Columns["Total de la compra"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             lblTotalCompra.Text = Convert.ToString(gestor.calcularMontoUltimaCompra());
         }
 

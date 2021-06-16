@@ -284,7 +284,7 @@ namespace LenCo
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string consulta = @"SELECT pd.articulo 'Articulo', pd.descripcion 'Descripcion', m.nombre 'Marca', r.nombre 'Rubro', t.nombre 'Talle', c.nombre 'Color',  p.nombre 'Presentacion',  precioVenta 'Precio Venta'
+                string consulta = @"SELECT pd.idProducto 'ID', pd.articulo 'Articulo', pd.descripcion 'Descripcion', m.nombre 'Marca', r.nombre 'Rubro', t.nombre 'Talle', c.nombre 'Color',  p.nombre 'Presentacion',  precioVenta 'Precio Venta'
                                         FROM Productos pd
                                         JOIN Marcas m ON pd.idMarca = m.idMarca
                                         JOIN Rubros r ON pd.idRubro = r.idRubro
@@ -308,14 +308,15 @@ namespace LenCo
                     if (dr.Read())
                     {
                         Producto p = new Producto();
-                        p.pArticulo = dr.GetInt32(0);
-                        p.pDescripcion = dr.GetString(1);
-                        p.pMarca.pNombre = dr.GetString(2);
-                        p.pRubro.pNombre = dr.GetString(3);
-                        p.pTalle.pNombre = dr.GetString(4);
-                        p.pColor.pNombre = dr.GetString(5);
-                        p.pPresent.pNombre = dr.GetString(6);
-                        p.pPrecioVenta = (double)dr.GetDecimal(7);
+                        p.pIdProducto = dr.GetInt32(0);
+                        p.pArticulo = dr.GetInt32(1);
+                        p.pDescripcion = dr.GetString(2);
+                        p.pMarca.pNombre = dr.GetString(3);
+                        p.pRubro.pNombre = dr.GetString(4);
+                        p.pTalle.pNombre = dr.GetString(5);
+                        p.pColor.pNombre = dr.GetString(6);
+                        p.pPresent.pNombre = dr.GetString(7);
+                        p.pPrecioVenta = (double)dr.GetDecimal(8);
                         prod = p;
                     }
                 }
@@ -720,11 +721,12 @@ namespace LenCo
 
         public void agregarVenta(Venta venta)
         {
+
             try
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string consulta = "exec InsertarVenta(@fechaVenta,@idSucursal,@montoDescuento,@idFormaPago)";
+                string consulta = "exec InsertarVenta @fechaVenta,@idSucursal,@montoDescuento,@idFormaPago";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@fechaVenta", venta.pFechaVenta);
                 cmd.Parameters.AddWithValue("@idSucursal", venta.pIdSucursal);
@@ -758,7 +760,7 @@ namespace LenCo
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string consulta = "exec InsertarDetalleVenta(@idProducto,@cantidad,@idVenta)";
+                string consulta = "exec InsertarDetalleVenta @idProducto,@cantidad,@idVenta";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idProducto", detalle.pProducto.pIdProducto);
                 cmd.Parameters.AddWithValue("@cantidad", detalle.pCantidad);
@@ -821,7 +823,17 @@ namespace LenCo
             combo.DropDownStyle = ComboBoxStyle.DropDownList;
             combo.SelectedIndex = -1;
         }
-
+        public void cargarComboFormasPago(ComboBox combo)
+        {
+            string sql = @"SELECT fp.idFormaPago 'Forma de pago', (fp.nombre + ' - ' + CAST(i.porcentaje AS varchar(5)) + '%') 'Nombre'
+                                FROM FormasPago fp JOIN Intereses i ON fp.idInteres = i.idInteres";
+            DataTable tabla = mostrarConsulta(sql);
+            combo.DataSource = tabla;
+            combo.DisplayMember = tabla.Columns[1].ColumnName; // lo que se visualiza
+            combo.ValueMember = tabla.Columns[0].ColumnName; // lo que se captura
+            combo.DropDownStyle = ComboBoxStyle.DropDownList;
+            combo.SelectedIndex = -1;
+        }
         public void cargarComboModificar(ComboBox combo, string nombreTabla, int id)
         {
             string consulta = "SELECT * FROM " + nombreTabla + " WHERE 1 = " + id;
@@ -878,7 +890,7 @@ namespace LenCo
             {
                 abrirConexion();
 
-                string consulta = @"SELECT co.num_comprobante 'N° Comprobante', co.fecha_compra 'Fecha', pr.nombre 'Proveedor', SUM(dc.cantidadUnit*dc.precioUnit) 'Total de la compra'
+                string consulta = @"SELECT co.num_comprobante 'N° Comprobante', co.fecha_compra 'Fecha', pr.nombre 'Proveedor', CAST(SUM(dc.cantidadUnit*dc.precioUnit) AS DECIMAL(8,2)) 'Total de la compra'
                                     FROM Compras co
                                     JOIN DetallesCompra dc ON co.idCompra = dc.idCompra
                                     JOIN Proveedores pr ON pr.idProveedor = co.idProveedor
@@ -901,7 +913,6 @@ namespace LenCo
             }
             return resultado;
         }
-
         public DataTable listadoDetalleCompras()
         {
             DataTable resultado = new DataTable();
@@ -909,11 +920,77 @@ namespace LenCo
             {
                 abrirConexion();
 
-                string consulta = @"SELECT pd.articulo 'Articulo', pd.descripcion 'Descripcion', dc.cantidadUnit 'Cantidad', dc.precioUnit 'Precio de compra', (dc.cantidadUnit * dc.precioUnit) 'Subtotal'
+                string consulta = @"SELECT pd.articulo 'Articulo', pd.descripcion 'Descripcion', dc.cantidadUnit 'Cantidad', CAST ((dc.precioUnit) AS decimal(8,2)) 'Precio', CAST ((dc.cantidadUnit * dc.precioUnit) AS decimal(6,2)) 'Subtotal'
                                     FROM Productos pd
                                     JOIN DetallesCompra dc ON pd.idProducto = dc.idProducto
                                     JOIN Compras c ON c.idCompra = dc.idCompra
                                     WHERE c.idCompra = (SELECT MAX(IdCompra) From Compras)";
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+        public DataTable listadoVentaDiaria()
+        {
+            DataTable resultado = new DataTable();
+            try
+            {
+                abrirConexion();
+
+                string consulta = @"SELECT v.idVenta 'ID Venta', v.fecha_venta 'Fecha', CAST(SUM(p.precioVenta*dv.cantidadUnit) AS decimal(8,2)) 'Monto venta', CAST ((v.montoDescuento) AS decimal(8,2)) 'Descuento',
+	                                       fp.nombre 'Forma de pago', i.porcentaje '% interes', CAST(((SUM(p.precioVenta*dv.cantidadUnit) - v.montoDescuento) * (1 + i.porcentaje/100.00))AS decimal(8,2)) 'Totales'
+                                    FROM Productos p
+                                    JOIN DetallesVenta dv ON p.idProducto = dv.idProducto
+                                    JOIN Ventas v on v.idVenta = dv.idVenta
+                                    JOIN FormasPago fp on fp.idFormaPago = v.idFormaPago
+                                    LEFT JOIN Intereses i ON i.idInteres = fp.idInteres
+									WHERE CONVERT(date,v.fecha_venta) = CONVERT(date,GETDATE())
+                                    GROUP BY v.idVenta,v.fecha_venta, v.montoDescuento,fp.nombre, i.porcentaje";
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+        public DataTable listadosStockBajo()
+        {
+            DataTable resultado = new DataTable();
+            try
+            {
+                abrirConexion();
+
+                string consulta = @"SELECT p.articulo 'Articulo' , m.nombre 'Marca', co.nombre 'Color', i.cantidad 'Stock', s.nombre 'Sucursal'
+                            FROM Productos p 
+                            JOIN Inventarios i ON p.idProducto = i.idProducto
+                            JOIN Colores co ON p.idColor = co.idColor
+                            JOIN Marcas m ON p.idMarca = m.idMarca
+                            JOIN Sucursales s ON i.idSucursal = s.idSucursal
+                            WHERE i.cantidad <= 2";
                 SqlCommand cmd = new SqlCommand();
 
                 cmd.CommandText = consulta;

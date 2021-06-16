@@ -96,5 +96,17 @@ namespace LenCo.Vista
             abrirFormPanel(new frmVenta());
             habilitarSubMenu(false);
         }
+
+        private void btnAdmDevoluc_Click(object sender, EventArgs e)
+        {
+            abrirFormPanel(new frmDevoluciones());
+            habilitarSubMenu(false);
+        }
+
+        private void btnDevoluc_Click(object sender, EventArgs e)
+        {
+            abrirFormPanel(new frmDevoluciones());
+            habilitarSubMenu(false);
+        }
     }
 }

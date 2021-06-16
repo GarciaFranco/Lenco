@@ -146,6 +146,7 @@ namespace LenCo.Vista
             this.btnAdmDevoluc.Text = "Devoluciones";
             this.btnAdmDevoluc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdmDevoluc.UseVisualStyleBackColor = false;
+            this.btnAdmDevoluc.Click += new System.EventHandler(this.btnAdmDevoluc_Click);
             // 
             // btnAdmVentas
             // 
@@ -233,6 +234,7 @@ namespace LenCo.Vista
             this.btnDevoluc.TabIndex = 5;
             this.btnDevoluc.Text = "Devoluciones";
             this.btnDevoluc.UseVisualStyleBackColor = false;
+            this.btnDevoluc.Click += new System.EventHandler(this.btnDevoluc_Click);
             // 
             // btnVentas
             // 

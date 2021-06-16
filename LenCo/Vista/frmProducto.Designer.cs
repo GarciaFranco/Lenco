@@ -65,12 +65,12 @@ namespace LenCo
             this.lblStockN1 = new System.Windows.Forms.Label();
             this.lblStockN2 = new System.Windows.Forms.Label();
             this.txtStockN1 = new System.Windows.Forms.TextBox();
-            this.dgvReporteBajoStock = new System.Windows.Forms.DataGridView();
             this.label11 = new System.Windows.Forms.Label();
+            this.dgvReportePocoStock = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.gbProducto.SuspendLayout();
             this.gbStock.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReporteBajoStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReportePocoStock)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -484,23 +484,6 @@ namespace LenCo
             this.txtStockN1.Size = new System.Drawing.Size(53, 22);
             this.txtStockN1.TabIndex = 83;
             // 
-            // dgvReporteBajoStock
-            // 
-            this.dgvReporteBajoStock.AllowUserToAddRows = false;
-            this.dgvReporteBajoStock.AllowUserToDeleteRows = false;
-            this.dgvReporteBajoStock.AllowUserToResizeColumns = false;
-            this.dgvReporteBajoStock.AllowUserToResizeRows = false;
-            this.dgvReporteBajoStock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvReporteBajoStock.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvReporteBajoStock.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvReporteBajoStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReporteBajoStock.Location = new System.Drawing.Point(719, 377);
-            this.dgvReporteBajoStock.MultiSelect = false;
-            this.dgvReporteBajoStock.Name = "dgvReporteBajoStock";
-            this.dgvReporteBajoStock.ReadOnly = true;
-            this.dgvReporteBajoStock.Size = new System.Drawing.Size(339, 271);
-            this.dgvReporteBajoStock.TabIndex = 83;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -511,14 +494,31 @@ namespace LenCo
             this.label11.TabIndex = 84;
             this.label11.Text = "Productos con poco stock:";
             // 
+            // dgvReportePocoStock
+            // 
+            this.dgvReportePocoStock.AllowUserToAddRows = false;
+            this.dgvReportePocoStock.AllowUserToDeleteRows = false;
+            this.dgvReportePocoStock.AllowUserToResizeColumns = false;
+            this.dgvReportePocoStock.AllowUserToResizeRows = false;
+            this.dgvReportePocoStock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvReportePocoStock.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvReportePocoStock.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvReportePocoStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReportePocoStock.Location = new System.Drawing.Point(717, 377);
+            this.dgvReportePocoStock.MultiSelect = false;
+            this.dgvReportePocoStock.Name = "dgvReportePocoStock";
+            this.dgvReportePocoStock.ReadOnly = true;
+            this.dgvReportePocoStock.Size = new System.Drawing.Size(341, 271);
+            this.dgvReportePocoStock.TabIndex = 85;
+            // 
             // frmProducto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1070, 660);
+            this.Controls.Add(this.dgvReportePocoStock);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.dgvReporteBajoStock);
             this.Controls.Add(this.gbProducto);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
@@ -534,7 +534,7 @@ namespace LenCo
             this.gbProducto.PerformLayout();
             this.gbStock.ResumeLayout(false);
             this.gbStock.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvReporteBajoStock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReportePocoStock)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -576,7 +576,7 @@ namespace LenCo
         private System.Windows.Forms.Button btnCargarStock;
         private System.Windows.Forms.TextBox txtStockAlmacen;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dgvReporteBajoStock;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.DataGridView dgvReportePocoStock;
     }
 }

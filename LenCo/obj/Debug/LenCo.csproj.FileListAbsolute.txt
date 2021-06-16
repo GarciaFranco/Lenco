@@ -46,3 +46,29 @@ D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmDetalleCompra.reso
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmAltaProducto.resources
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmPrincipal.resources
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmVenta.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\LenCo.exe.config
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\LenCo.exe
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\LenCo.pdb
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\System.Security.Permissions.dll
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\System.Security.AccessControl.xml
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\System.Security.Permissions.xml
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.csprojAssemblyReference.cache
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmVenta.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmAltaProducto.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmCompra.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmDetalleCompra.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.frmLogin.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmPrincipal.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.frmProducto.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Properties.Resources.resources
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.csproj.GenerateResource.cache
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.csproj.CoreCompileInputs.cache
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.csproj.CopyComplete
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.exe
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.pdb
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmDevoluciones.resources

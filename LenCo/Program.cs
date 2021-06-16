@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LenCo.Vista;
+using System;
 using System.Windows.Forms;
 
 namespace LenCo
