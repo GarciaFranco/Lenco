@@ -251,7 +251,6 @@ namespace LenCo
             dgvProductos.Columns["Talle"].Visible = false;
             dgvProductos.Columns["Color"].Visible = false;
             dgvProductos.Columns["Rubro"].Visible = false;
-            dgvProductos.Columns["MarcaID"].Visible = false;
         }
 
         private void msg(string msg)

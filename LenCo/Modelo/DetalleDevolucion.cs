@@ -9,27 +9,25 @@ namespace LenCo.Modelo
     public class DetalleDevolucion
     {
         private int idDetalleDevolucion;
-        private DetalleDevolucion detalle;
-        private Producto productoEntrante;
-        private Producto productoSaliente;
-        private bool cambioProducto;
-        private double notaSaliente;
+        private Producto productoDevuelto;
+        private Devolucion devolucion;
 
-        public DetalleDevolucion(int idDetalleDevolucion, DetalleDevolucion detalle, Producto productoEntrante, Producto productoSaliente, bool cambioProducto, double notaSaliente)
+        public DetalleDevolucion(int idDetalleDevolucion, Producto productoDevuelto, Devolucion devolucion)
         {
             this.idDetalleDevolucion = idDetalleDevolucion;
-            this.detalle = detalle;
-            this.productoEntrante = productoEntrante;
-            this.productoSaliente = productoSaliente;
-            this.cambioProducto = cambioProducto;
-            this.notaSaliente = notaSaliente;
+            this.productoDevuelto = productoDevuelto;
+            this.devolucion = devolucion;
+        }
+
+        public DetalleDevolucion()
+        {
+            this.idDetalleDevolucion = 0;
+            this.productoDevuelto = new Producto();
+            this.devolucion = new Devolucion();
         }
 
         public int pIdDetalleDevolucion { get => idDetalleDevolucion; set => idDetalleDevolucion = value; }
-        public Producto pProductoEntrante { get => productoEntrante; set => productoEntrante = value; }
-        public Producto pProductoSaliente { get => productoSaliente; set => productoSaliente = value; }
-        public bool pCambioProducto { get => cambioProducto; set => cambioProducto = value; }
-        public double pNotaSaliente { get => notaSaliente; set => notaSaliente = value; }
-        internal DetalleDevolucion pDetalle { get => detalle; set => detalle = value; }
+        public Producto pProductoDevuelto { get => productoDevuelto; set => productoDevuelto = value; }
+        public Devolucion pDevolucion { get => devolucion; set => devolucion = value; }
     }
 }

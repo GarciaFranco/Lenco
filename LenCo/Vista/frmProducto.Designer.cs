@@ -163,7 +163,7 @@ namespace LenCo
             // 
             // btnCargar
             // 
-            this.btnCargar.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnCargar.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnCargar.FlatAppearance.BorderSize = 0;
             this.btnCargar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -428,7 +428,7 @@ namespace LenCo
             // 
             // btnCargarStock
             // 
-            this.btnCargarStock.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnCargarStock.BackColor = System.Drawing.Color.SlateBlue;
             this.btnCargarStock.FlatAppearance.BorderSize = 0;
             this.btnCargarStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCargarStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

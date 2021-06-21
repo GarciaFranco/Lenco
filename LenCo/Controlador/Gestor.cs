@@ -785,6 +785,85 @@ namespace LenCo
 
         #endregion Detalle ventas
 
+        #region Devoluciones
+
+        public bool aprobarDevolucion(int idVenta)
+        {
+            bool aprobado = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string sql = @"SELECT venta.idVenta 'ID Venta'
+                                FROM Ventas venta
+                                WHERE venta.idVenta IN (
+							                                SELECT v.idVenta 'ID Venta'
+							                                FROM Ventas v
+							                                JOIN DetallesVenta dv ON v.idVenta = dv.idVenta
+							                                WHERE DAY(v.fecha_venta) BETWEEN DAY(GETDATE()-7) AND DAY(GETDATE())
+							                                )
+	                                  and venta.idVenta = @idVenta";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idVenta", idVenta);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    aprobado = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }          
+            return aprobado;
+        }
+        
+        public double tomarPrecioProducto(string codigo)
+        {
+            double precio = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string sql = @"SELECT precioVenta FROM Productos WHERE codigoProv = @codigo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@codigo", codigo);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    precio = dr.GetDouble(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return precio;
+        }
+        #endregion
+
         #region Metodos genericos
 
         public DataTable mostrarConsulta(string consulta)

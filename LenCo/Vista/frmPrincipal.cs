@@ -108,5 +108,6 @@ namespace LenCo.Vista
             abrirFormPanel(new frmDevoluciones());
             habilitarSubMenu(false);
         }
+
     }
 }
