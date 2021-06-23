@@ -65,7 +65,7 @@ namespace LenCo
             this.lblStockN1 = new System.Windows.Forms.Label();
             this.lblStockN2 = new System.Windows.Forms.Label();
             this.txtStockN1 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lblReporte = new System.Windows.Forms.Label();
             this.dgvReportePocoStock = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.gbProducto.SuspendLayout();
@@ -111,6 +111,7 @@ namespace LenCo
             this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductos.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvProductos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvProductos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Location = new System.Drawing.Point(12, 45);
             this.dgvProductos.MultiSelect = false;
@@ -484,15 +485,15 @@ namespace LenCo
             this.txtStockN1.Size = new System.Drawing.Size(53, 22);
             this.txtStockN1.TabIndex = 83;
             // 
-            // label11
+            // lblReporte
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(780, 352);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(214, 18);
-            this.label11.TabIndex = 84;
-            this.label11.Text = "Productos con poco stock:";
+            this.lblReporte.AutoSize = true;
+            this.lblReporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReporte.Location = new System.Drawing.Point(780, 352);
+            this.lblReporte.Name = "lblReporte";
+            this.lblReporte.Size = new System.Drawing.Size(214, 18);
+            this.lblReporte.TabIndex = 84;
+            this.lblReporte.Text = "Productos con poco stock:";
             // 
             // dgvReportePocoStock
             // 
@@ -503,6 +504,7 @@ namespace LenCo
             this.dgvReportePocoStock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvReportePocoStock.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvReportePocoStock.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvReportePocoStock.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.dgvReportePocoStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReportePocoStock.Location = new System.Drawing.Point(717, 377);
             this.dgvReportePocoStock.MultiSelect = false;
@@ -518,7 +520,7 @@ namespace LenCo
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1070, 660);
             this.Controls.Add(this.dgvReportePocoStock);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lblReporte);
             this.Controls.Add(this.gbProducto);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
@@ -576,7 +578,7 @@ namespace LenCo
         private System.Windows.Forms.Button btnCargarStock;
         private System.Windows.Forms.TextBox txtStockAlmacen;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblReporte;
         private System.Windows.Forms.DataGridView dgvReportePocoStock;
     }
 }

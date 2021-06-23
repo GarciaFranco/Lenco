@@ -25,6 +25,7 @@ namespace LenCo.Vista
             InitializeComponent();
             cargarCombos();
             habilitarControles(true);
+            dgvDetalleCompra.Columns["Precio"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         public frmDetalleCompra()
@@ -178,15 +179,15 @@ namespace LenCo.Vista
                     producto.pDescripcion = dgvProductosAlDetalle.CurrentRow.Cells["Descripcion"].Value.ToString(); ;
 
                     int cantidad = Convert.ToInt32(txtCantidad.Text);
-                    double precio = Convert.ToInt32(txtPrecioCompra.Text);
+                    double precio = Convert.ToDouble(txtPrecioCompra.Text);
 
                     DetalleCompra detalle = new DetalleCompra();
                     detalle.pCantidadUnit = cantidad;
-                    detalle.pPrecioUnit = precio;
+                    detalle.pPrecioUnit = Math.Round(precio, 2);
 
                     lista.Add(detalle);
 
-                    dgvDetalleCompra.Rows.Add(idProducto, producto.pArticulo.ToString(), producto.pDescripcion, detalle.pCantidadUnit.ToString(), detalle.pPrecioUnit.ToString());
+                    dgvDetalleCompra.Rows.Add(idProducto, producto.pArticulo.ToString(), producto.pDescripcion, detalle.pCantidadUnit.ToString(), (decimal)detalle.pPrecioUnit);
                     limpiar();
                 }
                 else
@@ -301,6 +302,13 @@ namespace LenCo.Vista
         {
             dgvProductosAlDetalle.Columns["ID"].Visible = false;
             dgvProductosAlDetalle.Columns["Descripcion"].Visible = false;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            dgvProductosAlDetalle.Rows.Clear();
+            dgvDetalleCompra.Rows.Clear();
+            this.Close();
         }
     }
 }

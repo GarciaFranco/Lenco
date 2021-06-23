@@ -260,10 +260,16 @@ namespace LenCo.Vista
             // 
             // dgvVentasDiarias
             // 
+            this.dgvVentasDiarias.AllowUserToAddRows = false;
+            this.dgvVentasDiarias.AllowUserToDeleteRows = false;
+            this.dgvVentasDiarias.AllowUserToResizeColumns = false;
+            this.dgvVentasDiarias.AllowUserToResizeRows = false;
             this.dgvVentasDiarias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvVentasDiarias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVentasDiarias.Location = new System.Drawing.Point(31, 314);
+            this.dgvVentasDiarias.MultiSelect = false;
             this.dgvVentasDiarias.Name = "dgvVentasDiarias";
+            this.dgvVentasDiarias.ReadOnly = true;
             this.dgvVentasDiarias.Size = new System.Drawing.Size(954, 240);
             this.dgvVentasDiarias.TabIndex = 4;
             // 

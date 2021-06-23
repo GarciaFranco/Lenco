@@ -31,6 +31,7 @@ namespace LenCo.Vista
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.lblTerminos = new System.Windows.Forms.Label();
             this.btnSalir = new System.Windows.Forms.Button();
             this.panelSubMenu = new System.Windows.Forms.Panel();
             this.btnAdmCompras = new System.Windows.Forms.Button();
@@ -56,6 +57,7 @@ namespace LenCo.Vista
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.panelMenu.Controls.Add(this.lblTerminos);
             this.panelMenu.Controls.Add(this.btnSalir);
             this.panelMenu.Controls.Add(this.panelSubMenu);
             this.panelMenu.Controls.Add(this.btnLogout);
@@ -70,6 +72,19 @@ namespace LenCo.Vista
             this.panelMenu.Size = new System.Drawing.Size(210, 660);
             this.panelMenu.TabIndex = 0;
             // 
+            // lblTerminos
+            // 
+            this.lblTerminos.AutoSize = true;
+            this.lblTerminos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblTerminos.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTerminos.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblTerminos.Location = new System.Drawing.Point(16, 104);
+            this.lblTerminos.Name = "lblTerminos";
+            this.lblTerminos.Size = new System.Drawing.Size(168, 16);
+            this.lblTerminos.TabIndex = 12;
+            this.lblTerminos.Text = "  Términos y Condiciones";
+            this.lblTerminos.Click += new System.EventHandler(this.lblTerminos_Click);
+            // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.LightSeaGreen;
@@ -79,7 +94,7 @@ namespace LenCo.Vista
             this.btnSalir.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(55, 597);
+            this.btnSalir.Location = new System.Drawing.Point(53, 613);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(97, 35);
             this.btnSalir.TabIndex = 11;
@@ -177,7 +192,7 @@ namespace LenCo.Vista
             this.btnLogout.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Image = ((System.Drawing.Image)(resources.GetObject("btnLogout.Image")));
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(3, 555);
+            this.btnLogout.Location = new System.Drawing.Point(0, 571);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(210, 36);
             this.btnLogout.TabIndex = 9;
@@ -189,7 +204,7 @@ namespace LenCo.Vista
             // 
             this.lblUsuarioLog.AutoSize = true;
             this.lblUsuarioLog.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuarioLog.Location = new System.Drawing.Point(31, 522);
+            this.lblUsuarioLog.Location = new System.Drawing.Point(32, 532);
             this.lblUsuarioLog.Name = "lblUsuarioLog";
             this.lblUsuarioLog.Size = new System.Drawing.Size(144, 18);
             this.lblUsuarioLog.TabIndex = 0;
@@ -225,6 +240,7 @@ namespace LenCo.Vista
             // btnDevoluc
             // 
             this.btnDevoluc.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnDevoluc.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDevoluc.FlatAppearance.BorderSize = 0;
             this.btnDevoluc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnDevoluc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -242,6 +258,7 @@ namespace LenCo.Vista
             // btnVentas
             // 
             this.btnVentas.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnVentas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVentas.FlatAppearance.BorderSize = 0;
             this.btnVentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -259,6 +276,7 @@ namespace LenCo.Vista
             // btnProductos
             // 
             this.btnProductos.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnProductos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProductos.FlatAppearance.BorderSize = 0;
             this.btnProductos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -330,5 +348,6 @@ namespace LenCo.Vista
         private System.Windows.Forms.Panel panelSubMenu;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblTerminos;
     }
 }

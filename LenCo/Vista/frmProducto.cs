@@ -156,6 +156,7 @@ namespace LenCo
             {
                 gestor.modificarStock(stockSucursal1);
                 gestor.modificarStock(stockSucural2);
+                gestor.modificarStock(stockSucursal3);
                 limpiar();
             }
             cargarListas();

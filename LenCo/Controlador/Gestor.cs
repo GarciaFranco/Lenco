@@ -421,6 +421,7 @@ namespace LenCo
                 cerrarConexion();
             }
         }
+
         public void modificarStock(string codigoProducto, int cantidad, int idSucursal)
         {
             int aux = 0;
@@ -869,6 +870,7 @@ namespace LenCo
                 cerrarConexion();
             }
         }
+
         public bool aprobarDevolucion(int idVenta)
         {
             bool aprobado = false;
@@ -910,6 +912,7 @@ namespace LenCo
             }
             return aprobado;
         }
+
         public double tomarPrecioVendido(string codigoProducto, string codigoVenta)
         {
             double precio = 0;
@@ -918,7 +921,7 @@ namespace LenCo
                 SqlCommand cmd = new SqlCommand();
 
                 string sql = @"SELECT dv.precioUnit
-                               FROM DetallesVenta dv 
+                               FROM DetallesVenta dv
                                JOIN Productos p ON dv.idProducto = p.idProducto
                                JOIN Ventas v ON dv.idVenta = v.idVenta
                                WHERE p.codigoProv = @codProducto
@@ -936,7 +939,7 @@ namespace LenCo
 
                 if (dr.Read())
                 {
-                    precio = (double) dr.GetDecimal(0);
+                    precio = (double)dr.GetDecimal(0);
                 }
             }
             catch (Exception ex)
@@ -949,7 +952,8 @@ namespace LenCo
             }
             return precio;
         }
-        public bool existeEnVenta(string codigoProducto,string codigoVenta)
+
+        public bool existeEnVenta(string codigoProducto, string codigoVenta)
         {
             bool existe = false;
             try
@@ -960,7 +964,7 @@ namespace LenCo
                                 FROM Productos
                                 WHERE codigoProv in (
 				                                    SELECT p.codigoProv
-				                                    FROM Productos p 
+				                                    FROM Productos p
 					                                JOIN DetallesVenta dv ON p.idProducto = dv.idProducto
 					                                JOIN Ventas v ON dv.idVenta = v.idVenta
 					                                WHERE v.idVenta = @idVenta
@@ -992,6 +996,7 @@ namespace LenCo
             }
             return existe;
         }
+
         public double tomarPrecioProducto(string codigoProducto)
         {
             double precio = 0;
@@ -1029,6 +1034,7 @@ namespace LenCo
         #endregion Devoluciones
 
         #region Detalle Devolucion
+
         public void agregarDetalleDevolucion(DetalleDevolucion nueva)
         {
             try
@@ -1056,6 +1062,7 @@ namespace LenCo
                 cerrarConexion();
             }
         }
+
         public void agregarDetalleSalida(DetalleSalida detalle)
         {
             try
@@ -1085,7 +1092,8 @@ namespace LenCo
                 cerrarConexion();
             }
         }
-        #endregion
+
+        #endregion Detalle Devolucion
 
         #region Metodos genericos
 
@@ -1352,6 +1360,7 @@ namespace LenCo
             }
             return resultado;
         }
+
         public DataTable rankingRubros()
         {
             DataTable resultado = new DataTable();
@@ -1382,6 +1391,7 @@ namespace LenCo
             }
             return resultado;
         }
+
         public DataTable rankingTallesCorpinios()
         {
             DataTable resultado = new DataTable();
@@ -1389,7 +1399,7 @@ namespace LenCo
             {
                 abrirConexion();
 
-                string consulta = @"SELECT ta.nombre , SUM(dv.cantidadUnit) 'Cantidad' FROM DetallesVenta dv
+                string consulta = @"SELECT ta.nombre 'Talle' , SUM(dv.cantidadUnit) 'Cantidad' FROM DetallesVenta dv
                                     JOIN Productos p ON dv.idProducto = p.idProducto
                                     JOIN Talles ta ON p.idTalle = ta.idTalle
                                     JOIN Rubros ru ON p.idRubro = ru.idRubro
@@ -1415,6 +1425,7 @@ namespace LenCo
             }
             return resultado;
         }
-        #endregion
+
+        #endregion Reportes
     }
 }

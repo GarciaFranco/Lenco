@@ -38,7 +38,7 @@ namespace LenCo.Vista
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.dgvProductosAlDetalle = new System.Windows.Forms.DataGridView();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
@@ -76,7 +76,7 @@ namespace LenCo.Vista
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvDetalleCompra);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnCancelar);
             this.groupBox1.Controls.Add(this.dgvProductosAlDetalle);
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.btnConfirmar);
@@ -112,7 +112,8 @@ namespace LenCo.Vista
             this.dgvDetalleCompra.AllowUserToResizeColumns = false;
             this.dgvDetalleCompra.AllowUserToResizeRows = false;
             this.dgvDetalleCompra.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDetalleCompra.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvDetalleCompra.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvDetalleCompra.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDetalleCompra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDetalleCompra.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -158,20 +159,21 @@ namespace LenCo.Vista
             this.Precio.Name = "Precio";
             this.Precio.ReadOnly = true;
             // 
-            // button1
+            // btnCancelar
             // 
-            this.button1.BackColor = System.Drawing.Color.Silver;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(583, 477);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 22);
-            this.button1.TabIndex = 112;
-            this.button1.Text = "Cancelar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnCancelar.BackColor = System.Drawing.Color.Silver;
+            this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCancelar.Location = new System.Drawing.Point(583, 477);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(91, 22);
+            this.btnCancelar.TabIndex = 112;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // dgvProductosAlDetalle
             // 
@@ -180,7 +182,8 @@ namespace LenCo.Vista
             this.dgvProductosAlDetalle.AllowUserToResizeColumns = false;
             this.dgvProductosAlDetalle.AllowUserToResizeRows = false;
             this.dgvProductosAlDetalle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductosAlDetalle.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvProductosAlDetalle.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvProductosAlDetalle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvProductosAlDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvProductosAlDetalle.Location = new System.Drawing.Point(444, 37);
             this.dgvProductosAlDetalle.MultiSelect = false;
@@ -448,7 +451,7 @@ namespace LenCo.Vista
         private System.Windows.Forms.ComboBox cbColor;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridView dgvProductosAlDetalle;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DataGridView dgvDetalleCompra;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Articulo;

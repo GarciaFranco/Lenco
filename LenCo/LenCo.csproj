@@ -86,6 +86,12 @@
     <Compile Include="Vista\frmReportesVentas.Designer.cs">
       <DependentUpon>frmReportesVentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vista\frmTerminosyCond.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmTerminosyCond.Designer.cs">
+      <DependentUpon>frmTerminosyCond.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\frmVenta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmReportesVentas.resx">
       <DependentUpon>frmReportesVentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmTerminosyCond.resx">
+      <DependentUpon>frmTerminosyCond.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmVenta.resx">
       <DependentUpon>frmVenta.cs</DependentUpon>

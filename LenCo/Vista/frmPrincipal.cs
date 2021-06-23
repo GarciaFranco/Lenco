@@ -109,5 +109,10 @@ namespace LenCo.Vista
             habilitarSubMenu(false);
         }
 
+        private void lblTerminos_Click(object sender, EventArgs e)
+        {
+            frmTerminosyCond frm = new frmTerminosyCond();
+            frm.ShowDialog();
+        }
     }
 }

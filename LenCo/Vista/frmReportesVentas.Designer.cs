@@ -40,6 +40,7 @@ namespace LenCo.Vista
             this.dgvReporte.AllowUserToOrderColumns = true;
             this.dgvReporte.AllowUserToResizeColumns = false;
             this.dgvReporte.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvReporte.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvReporte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvReporte.Location = new System.Drawing.Point(12, 12);
             this.dgvReporte.MultiSelect = false;
@@ -57,6 +58,7 @@ namespace LenCo.Vista
             this.ClientSize = new System.Drawing.Size(800, 361);
             this.Controls.Add(this.dgvReporte);
             this.Name = "frmReportesVentas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reportes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvReporte)).EndInit();
             this.ResumeLayout(false);

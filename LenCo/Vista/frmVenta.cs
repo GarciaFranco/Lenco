@@ -115,7 +115,7 @@ namespace LenCo.Vista
                 }
                 double interes = tomarInteres();
                 double valor = (montoTotalVenta - montoDescuento) * interes;
-                MessageBox.Show($"Venta cargada con exito! Monto de la venta: ${valor}" );
+                MessageBox.Show($"Venta cargada con exito! Monto de la venta: ${valor}");
                 actualizarVentas();
             }
             catch (Exception ex)
@@ -294,6 +294,7 @@ namespace LenCo.Vista
             dgvVentasDiarias.DataSource = dt;
             dgvVentasDiarias.Columns["ID Venta"].Visible = false;
             dgvVentasDiarias.Columns["Totales"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvVentasDiarias.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvVentasDiarias.Columns["Descuento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvVentasDiarias.Columns["% Interes"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }

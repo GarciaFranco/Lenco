@@ -58,7 +58,8 @@ namespace LenCo.Vista
             this.dgvCompras.AllowUserToResizeColumns = false;
             this.dgvCompras.AllowUserToResizeRows = false;
             this.dgvCompras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvCompras.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvCompras.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvCompras.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCompras.Location = new System.Drawing.Point(30, 368);
             this.dgvCompras.MultiSelect = false;
@@ -74,7 +75,8 @@ namespace LenCo.Vista
             this.dgvDetalleCompra.AllowUserToResizeColumns = false;
             this.dgvDetalleCompra.AllowUserToResizeRows = false;
             this.dgvDetalleCompra.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDetalleCompra.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvDetalleCompra.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvDetalleCompra.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDetalleCompra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetalleCompra.Location = new System.Drawing.Point(456, 41);
             this.dgvDetalleCompra.MultiSelect = false;
@@ -222,7 +224,7 @@ namespace LenCo.Vista
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(910, 328);
+            this.label7.Location = new System.Drawing.Point(911, 338);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 19);
             this.label7.TabIndex = 15;
@@ -233,7 +235,7 @@ namespace LenCo.Vista
             this.lblTotalCompra.AutoSize = true;
             this.lblTotalCompra.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalCompra.ForeColor = System.Drawing.Color.Red;
-            this.lblTotalCompra.Location = new System.Drawing.Point(987, 328);
+            this.lblTotalCompra.Location = new System.Drawing.Point(988, 338);
             this.lblTotalCompra.Name = "lblTotalCompra";
             this.lblTotalCompra.Size = new System.Drawing.Size(17, 18);
             this.lblTotalCompra.TabIndex = 16;

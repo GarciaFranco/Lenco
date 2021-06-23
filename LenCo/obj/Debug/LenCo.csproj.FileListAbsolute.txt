@@ -99,3 +99,6 @@ D:\Documentos\GitHub\Lenco\LenCo\obj\Debug\LenCo.csproj.CopyComplete
 D:\Documentos\GitHub\Lenco\LenCo\obj\Debug\LenCo.exe
 D:\Documentos\GitHub\Lenco\LenCo\obj\Debug\LenCo.pdb
 C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmReportesVentas.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmDevoluciones.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmReportesVentas.resources
+D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmTerminosyCond.resources
