@@ -69,6 +69,7 @@
     <Compile Include="Modelo\Compra.cs" />
     <Compile Include="Modelo\DetalleCompra.cs" />
     <Compile Include="Modelo\DetalleDevolucion.cs" />
+    <Compile Include="Modelo\DetalleSalida.cs" />
     <Compile Include="Modelo\DetalleVenta.cs" />
     <Compile Include="Modelo\Devolucion.cs" />
     <Compile Include="Modelo\Stock.cs" />
@@ -78,6 +79,12 @@
     </Compile>
     <Compile Include="Vista\frmDevoluciones.Designer.cs">
       <DependentUpon>frmDevoluciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\frmReportesVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\frmReportesVentas.Designer.cs">
+      <DependentUpon>frmReportesVentas.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\frmVenta.cs">
       <SubType>Form</SubType>
@@ -132,6 +139,9 @@
     <Compile Include="Modelo\Usuario.cs" />
     <EmbeddedResource Include="Vista\frmDevoluciones.resx">
       <DependentUpon>frmDevoluciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\frmReportesVentas.resx">
+      <DependentUpon>frmReportesVentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\frmVenta.resx">
       <DependentUpon>frmVenta.cs</DependentUpon>

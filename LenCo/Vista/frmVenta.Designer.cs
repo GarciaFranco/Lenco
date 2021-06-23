@@ -62,6 +62,9 @@ namespace LenCo.Vista
             this.lblDescuento = new System.Windows.Forms.Label();
             this.lblMontoVta = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnReporte1 = new System.Windows.Forms.Button();
+            this.btnReporte2 = new System.Windows.Forms.Button();
+            this.btnReporte3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalleVenta)).BeginInit();
             this.gpProducto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentasDiarias)).BeginInit();
@@ -410,11 +413,62 @@ namespace LenCo.Vista
             this.label4.Text = "Monto: $";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // btnReporte1
+            // 
+            this.btnReporte1.BackColor = System.Drawing.Color.Crimson;
+            this.btnReporte1.FlatAppearance.BorderSize = 0;
+            this.btnReporte1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReporte1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReporte1.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnReporte1.Location = new System.Drawing.Point(61, 583);
+            this.btnReporte1.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReporte1.Name = "btnReporte1";
+            this.btnReporte1.Size = new System.Drawing.Size(270, 40);
+            this.btnReporte1.TabIndex = 104;
+            this.btnReporte1.Text = "RANKING PRODUCTOS";
+            this.btnReporte1.UseVisualStyleBackColor = false;
+            this.btnReporte1.Click += new System.EventHandler(this.btnReporte1_Click);
+            // 
+            // btnReporte2
+            // 
+            this.btnReporte2.BackColor = System.Drawing.Color.Crimson;
+            this.btnReporte2.FlatAppearance.BorderSize = 0;
+            this.btnReporte2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReporte2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReporte2.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnReporte2.Location = new System.Drawing.Point(379, 583);
+            this.btnReporte2.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReporte2.Name = "btnReporte2";
+            this.btnReporte2.Size = new System.Drawing.Size(243, 40);
+            this.btnReporte2.TabIndex = 105;
+            this.btnReporte2.Text = "RUBROS MAS VENDIDOS";
+            this.btnReporte2.UseVisualStyleBackColor = false;
+            this.btnReporte2.Click += new System.EventHandler(this.btnReporte2_Click);
+            // 
+            // btnReporte3
+            // 
+            this.btnReporte3.BackColor = System.Drawing.Color.Crimson;
+            this.btnReporte3.FlatAppearance.BorderSize = 0;
+            this.btnReporte3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReporte3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReporte3.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnReporte3.Location = new System.Drawing.Point(670, 583);
+            this.btnReporte3.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReporte3.Name = "btnReporte3";
+            this.btnReporte3.Size = new System.Drawing.Size(270, 40);
+            this.btnReporte3.TabIndex = 106;
+            this.btnReporte3.Text = "RANKING TALLES VENDIDOS";
+            this.btnReporte3.UseVisualStyleBackColor = false;
+            this.btnReporte3.Click += new System.EventHandler(this.btnReporte3_Click);
+            // 
             // frmVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 660);
+            this.Controls.Add(this.btnReporte3);
+            this.Controls.Add(this.btnReporte2);
+            this.Controls.Add(this.btnReporte1);
             this.Controls.Add(this.gbRegistroVenta);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnCancelar);
@@ -473,5 +527,8 @@ namespace LenCo.Vista
         private System.Windows.Forms.DataGridViewTextBoxColumn color;
         private System.Windows.Forms.DataGridViewTextBoxColumn precioVenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.Button btnReporte1;
+        private System.Windows.Forms.Button btnReporte2;
+        private System.Windows.Forms.Button btnReporte3;
     }
 }

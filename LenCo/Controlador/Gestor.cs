@@ -421,6 +421,61 @@ namespace LenCo
                 cerrarConexion();
             }
         }
+        public void modificarStock(string codigoProducto, int cantidad, int idSucursal)
+        {
+            int aux = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string sql = "SELECT idProducto FROM Productos WHERE codigoProv = @codigo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@codigo", codigoProducto);
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+
+                abrirConexion();
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        aux = dr.GetInt32(0);
+                    }
+                }
+
+                int idProducto = aux;
+
+                SqlCommand cmd2 = new SqlCommand();
+
+                string consulta = @"UPDATE Inventarios
+                                    SET cantidad = @cantidad
+                                    WHERE idProducto = @idProducto and idSucursal = @idSucursal";
+                cmd2.Parameters.Clear();
+                cmd2.Parameters.AddWithValue("@cantidad", cantidad);
+                cmd2.Parameters.AddWithValue("@idProducto", idProducto);
+                cmd2.Parameters.AddWithValue("@idSucursal", idSucursal);
+
+                abrirConexion();
+                cmd2.CommandType = CommandType.Text;
+                cmd2.CommandText = consulta;
+
+                cmd2.Connection = cn;
+                cmd2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+        }
 
         public int verStock(int idProducto, int idSucursal)
         {
@@ -721,7 +776,6 @@ namespace LenCo
 
         public void agregarVenta(Venta venta)
         {
-
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -760,9 +814,10 @@ namespace LenCo
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string consulta = "exec InsertarDetalleVenta @idProducto,@cantidad,@idVenta";
+                string consulta = "exec InsertarDetalleVenta @idProducto,@precioVenta,@cantidad,@idVenta";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@idProducto", detalle.pProducto.pIdProducto);
+                cmd.Parameters.AddWithValue("@precioVenta", detalle.PprecioVenta);
                 cmd.Parameters.AddWithValue("@cantidad", detalle.pCantidad);
                 cmd.Parameters.AddWithValue("@idVenta", detalle.pVenta.pIdVenta);
 
@@ -787,6 +842,33 @@ namespace LenCo
 
         #region Devoluciones
 
+        public void agregarDevolucion(Devolucion nueva)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "INSERT INTO Devoluciones VALUES (@fechaDevolucion, @descripcion)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@fechaDevolucion", nueva.pFecha_devolucion);
+                cmd.Parameters.AddWithValue("@descripcion", nueva.pDescripcion);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+        }
         public bool aprobarDevolucion(int idVenta)
         {
             bool aprobado = false;
@@ -825,20 +907,25 @@ namespace LenCo
             finally
             {
                 cerrarConexion();
-            }          
+            }
             return aprobado;
         }
-        
-        public double tomarPrecioProducto(string codigo)
+        public double tomarPrecioVendido(string codigoProducto, string codigoVenta)
         {
             double precio = 0;
             try
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string sql = @"SELECT precioVenta FROM Productos WHERE codigoProv = @codigo";
+                string sql = @"SELECT dv.precioUnit
+                               FROM DetallesVenta dv 
+                               JOIN Productos p ON dv.idProducto = p.idProducto
+                               JOIN Ventas v ON dv.idVenta = v.idVenta
+                               WHERE p.codigoProv = @codProducto
+                                      and v.idVenta = @codVenta";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@codigo", codigo);
+                cmd.Parameters.AddWithValue("@codProducto", codigoProducto);
+                cmd.Parameters.AddWithValue("@codVenta", codigoVenta);
 
                 abrirConexion();
                 cmd.CommandType = CommandType.Text;
@@ -849,7 +936,7 @@ namespace LenCo
 
                 if (dr.Read())
                 {
-                    precio = dr.GetDouble(0);
+                    precio = (double) dr.GetDecimal(0);
                 }
             }
             catch (Exception ex)
@@ -861,6 +948,142 @@ namespace LenCo
                 cerrarConexion();
             }
             return precio;
+        }
+        public bool existeEnVenta(string codigoProducto,string codigoVenta)
+        {
+            bool existe = false;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string sql = @"SELECT codigoProv
+                                FROM Productos
+                                WHERE codigoProv in (
+				                                    SELECT p.codigoProv
+				                                    FROM Productos p 
+					                                JOIN DetallesVenta dv ON p.idProducto = dv.idProducto
+					                                JOIN Ventas v ON dv.idVenta = v.idVenta
+					                                WHERE v.idVenta = @idVenta
+					                                      and p.codigoProv = @codigo
+					                                )";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@codigo", codigoProducto);
+                cmd.Parameters.AddWithValue("@idVenta", codigoVenta);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    existe = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return existe;
+        }
+        public double tomarPrecioProducto(string codigoProducto)
+        {
+            double precio = 0;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string sql = @"SELECT precioVenta FROM Productos WHERE codigoProv = @codigo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@codigo", codigoProducto);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    precio = (double)dr.GetDecimal(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return precio;
+        }
+
+        #endregion Devoluciones
+
+        #region Detalle Devolucion
+        public void agregarDetalleDevolucion(DetalleDevolucion nueva)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "INSERT INTO DetallesDevolucion VALUES (@idProducto,@idDevolucion)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idProducto", nueva.pProductoDevuelto.pIdProducto);
+                cmd.Parameters.AddWithValue("@idDevolucion", nueva.pDevolucion.pIdDevolucion);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+        }
+        public void agregarDetalleSalida(DetalleSalida detalle)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "INSERT INTO DetallesSalida VALUES (@idTipoSalida,@idProducto,@idDevolucion,@montoNota)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idTipoSalida", detalle.pIdTipoSalida);
+                cmd.Parameters.AddWithValue("@idProducto", detalle.pIdProducto);
+                cmd.Parameters.AddWithValue("@idDevolucion", detalle.pDevolucion.pIdDevolucion);
+                cmd.Parameters.AddWithValue("@montoNota", detalle.pMontoNota);
+
+                abrirConexion();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
         }
         #endregion
 
@@ -902,6 +1125,7 @@ namespace LenCo
             combo.DropDownStyle = ComboBoxStyle.DropDownList;
             combo.SelectedIndex = -1;
         }
+
         public void cargarComboFormasPago(ComboBox combo)
         {
             string sql = @"SELECT fp.idFormaPago 'Forma de pago', (fp.nombre + ' - ' + CAST(i.porcentaje AS varchar(5)) + '%') 'Nombre'
@@ -913,6 +1137,7 @@ namespace LenCo
             combo.DropDownStyle = ComboBoxStyle.DropDownList;
             combo.SelectedIndex = -1;
         }
+
         public void cargarComboModificar(ComboBox combo, string nombreTabla, int id)
         {
             string consulta = "SELECT * FROM " + nombreTabla + " WHERE 1 = " + id;
@@ -992,6 +1217,7 @@ namespace LenCo
             }
             return resultado;
         }
+
         public DataTable listadoDetalleCompras()
         {
             DataTable resultado = new DataTable();
@@ -1022,6 +1248,7 @@ namespace LenCo
             }
             return resultado;
         }
+
         public DataTable listadoVentaDiaria()
         {
             DataTable resultado = new DataTable();
@@ -1029,8 +1256,8 @@ namespace LenCo
             {
                 abrirConexion();
 
-                string consulta = @"SELECT v.idVenta 'ID Venta', v.fecha_venta 'Fecha', CAST(SUM(p.precioVenta*dv.cantidadUnit) AS decimal(8,2)) 'Monto venta', CAST ((v.montoDescuento) AS decimal(8,2)) 'Descuento',
-	                                       fp.nombre 'Forma de pago', i.porcentaje '% interes', CAST(((SUM(p.precioVenta*dv.cantidadUnit) - v.montoDescuento) * (1 + i.porcentaje/100.00))AS decimal(8,2)) 'Totales'
+                string consulta = @"SELECT v.idVenta 'ID Venta', v.fecha_venta 'Fecha', CAST(SUM(dv.precioUnit*dv.cantidadUnit) AS decimal(8,2)) 'Monto venta', CAST ((v.montoDescuento) AS decimal(8,2)) 'Descuento',
+	                                       fp.nombre 'Forma de pago', i.porcentaje '% interes', CAST(((SUM(dv.precioUnit*dv.cantidadUnit) - v.montoDescuento) * (1 + i.porcentaje/100.00))AS decimal(8,2)) 'Totales'
                                     FROM Productos p
                                     JOIN DetallesVenta dv ON p.idProducto = dv.idProducto
                                     JOIN Ventas v on v.idVenta = dv.idVenta
@@ -1056,6 +1283,7 @@ namespace LenCo
             }
             return resultado;
         }
+
         public DataTable listadosStockBajo()
         {
             DataTable resultado = new DataTable();
@@ -1064,7 +1292,7 @@ namespace LenCo
                 abrirConexion();
 
                 string consulta = @"SELECT p.articulo 'Articulo' , m.nombre 'Marca', co.nombre 'Color', i.cantidad 'Stock', s.nombre 'Sucursal'
-                            FROM Productos p 
+                            FROM Productos p
                             JOIN Inventarios i ON p.idProducto = i.idProducto
                             JOIN Colores co ON p.idColor = co.idColor
                             JOIN Marcas m ON p.idMarca = m.idMarca
@@ -1090,5 +1318,103 @@ namespace LenCo
         }
 
         #endregion Listados
+
+        #region Reportes
+
+        public DataTable rankingProductosVendidos()
+        {
+            DataTable resultado = new DataTable();
+            try
+            {
+                abrirConexion();
+
+                string consulta = @"SELECT TOP(20) p.articulo 'Articulo', p.descripcion 'Descripcion', COUNT(dv.idProducto) 'Cantidad', suc.nombre 'Sucursal'
+                                    FROM DetallesVenta dv JOIN Ventas v ON dv.idVenta = v.idVenta
+                                    JOIN Productos p ON dv.idProducto = p.idProducto
+                                    JOIN Sucursales suc ON v.idSucursal = suc.idSucursal
+                                    GROUP BY p.articulo, p.descripcion, suc.nombre
+                                    ORDER BY Cantidad DESC";
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+        public DataTable rankingRubros()
+        {
+            DataTable resultado = new DataTable();
+            try
+            {
+                abrirConexion();
+
+                string consulta = @"SELECT ru.nombre 'Rubro', SUM(dv.cantidadUnit) 'Cantidad' FROM DetallesVenta dv
+                                    JOIN Productos p ON dv.idProducto = p.idProducto
+                                    JOIN Rubros ru ON p.idRubro = ru.idRubro
+                                    GROUP BY ru.nombre
+                                    ORDER BY Cantidad DESC";
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+        public DataTable rankingTallesCorpinios()
+        {
+            DataTable resultado = new DataTable();
+            try
+            {
+                abrirConexion();
+
+                string consulta = @"SELECT ta.nombre , SUM(dv.cantidadUnit) 'Cantidad' FROM DetallesVenta dv
+                                    JOIN Productos p ON dv.idProducto = p.idProducto
+                                    JOIN Talles ta ON p.idTalle = ta.idTalle
+                                    JOIN Rubros ru ON p.idRubro = ru.idRubro
+                                    WHERE ru.nombre = 'Corpiño'
+                                    GROUP BY ta.nombre
+                                    ORDER BY Cantidad DESC
+";
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = consulta;
+                cmd.Connection = cn;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(resultado);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+            return resultado;
+        }
+        #endregion
     }
 }

@@ -98,6 +98,7 @@ namespace LenCo.Vista
 
                     DetalleVenta detalle = new DetalleVenta();
                     detalle.pCantidad = Convert.ToInt32(row.Cells["Cantidad"].Value.ToString());
+                    detalle.PprecioVenta = Convert.ToDouble(row.Cells["precioVenta"].Value.ToString());
                     detalle.pProducto.pIdProducto = idProducto;
                     detalle.pVenta.pIdVenta = idVenta;
                     gestor.agregarDetalleVenta(detalle);
@@ -114,7 +115,7 @@ namespace LenCo.Vista
                 }
                 double interes = tomarInteres();
                 double valor = (montoTotalVenta - montoDescuento) * interes;
-                MessageBox.Show("Venta cargada con exito! Monto de la venta: $" + valor);
+                MessageBox.Show($"Venta cargada con exito! Monto de la venta: ${valor}" );
                 actualizarVentas();
             }
             catch (Exception ex)
@@ -242,6 +243,7 @@ namespace LenCo.Vista
             }
             return id;
         }
+
         private void limpiarCampos()
         {
             txtCodigo.Clear();
@@ -249,17 +251,20 @@ namespace LenCo.Vista
             txtDescuento.Clear();
             lblMaxCant.Text = "0";
         }
+
         private void mostrarFecha()
         {
             var fecha_hora = DateTime.Now;
             var fecha = fecha_hora.Date.ToString("dd-MM-yyyy");
             lblDia.Text = fecha;
         }
+
         private void cargarCombo()
         {
             Gestor gestor = new Gestor();
             gestor.cargarComboFormasPago(cbFormaPago);
         }
+
         private void deshabilitarControles()
         {
             gbRegistroVenta.Enabled = false;
@@ -267,19 +272,21 @@ namespace LenCo.Vista
             txtDescuento.Enabled = false;
             cbFormaPago.SelectedIndex = -1;
         }
+
         private double tomarInteres()
         {
             double interes = 1;
-            if(cbFormaPago.SelectedIndex == 2)
+            if (cbFormaPago.SelectedIndex == 2)
             {
                 interes = 1.10;
             }
-            else if(cbFormaPago.SelectedIndex == 3)
+            else if (cbFormaPago.SelectedIndex == 3)
             {
                 interes = 1.20;
             }
             return interes;
         }
+
         private void actualizarVentas()
         {
             Gestor gestor = new Gestor();
@@ -289,6 +296,30 @@ namespace LenCo.Vista
             dgvVentasDiarias.Columns["Totales"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvVentasDiarias.Columns["Descuento"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvVentasDiarias.Columns["% Interes"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
+        private void btnReporte1_Click(object sender, EventArgs e)
+        {
+            Gestor gestor = new Gestor();
+            DataTable dt = gestor.rankingProductosVendidos();
+            Form frmReporte = new frmReportesVentas(dt);
+            frmReporte.ShowDialog();
+        }
+
+        private void btnReporte2_Click(object sender, EventArgs e)
+        {
+            Gestor gestor = new Gestor();
+            DataTable dt = gestor.rankingRubros();
+            Form frmReporte = new frmReportesVentas(dt);
+            frmReporte.ShowDialog();
+        }
+
+        private void btnReporte3_Click(object sender, EventArgs e)
+        {
+            Gestor gestor = new Gestor();
+            DataTable dt = gestor.rankingTallesCorpinios();
+            Form frmReporte = new frmReportesVentas(dt);
+            frmReporte.ShowDialog();
         }
     }
 }

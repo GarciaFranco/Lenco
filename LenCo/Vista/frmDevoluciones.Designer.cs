@@ -31,22 +31,25 @@ namespace LenCo.Vista
         {
             this.lblEntrada = new System.Windows.Forms.Label();
             this.txtProductoEntra = new System.Windows.Forms.TextBox();
-            this.rbProducto = new System.Windows.Forms.RadioButton();
-            this.rbNotaCredito = new System.Windows.Forms.RadioButton();
             this.lblSalida = new System.Windows.Forms.Label();
             this.txtProductoSale = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnHistorial = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbDetalle = new System.Windows.Forms.GroupBox();
+            this.lblRestante = new System.Windows.Forms.Label();
+            this.lblSaliente = new System.Windows.Forms.Label();
+            this.lblEntrante = new System.Windows.Forms.Label();
+            this.lstSaliente = new System.Windows.Forms.ListBox();
+            this.lstEntrante = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAñadirEntrada = new System.Windows.Forms.Button();
             this.btnAñadirSalida = new System.Windows.Forms.Button();
-            this.lstEntrante = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.txtDescripDevolucion = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.gbDetalle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,32 +72,6 @@ namespace LenCo.Vista
             this.txtProductoEntra.TabIndex = 1;
             this.txtProductoEntra.Enter += new System.EventHandler(this.txtProductoEntra_Enter);
             // 
-            // rbProducto
-            // 
-            this.rbProducto.AutoSize = true;
-            this.rbProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbProducto.Location = new System.Drawing.Point(426, 213);
-            this.rbProducto.Name = "rbProducto";
-            this.rbProducto.Size = new System.Drawing.Size(104, 28);
-            this.rbProducto.TabIndex = 2;
-            this.rbProducto.TabStop = true;
-            this.rbProducto.Text = "Producto";
-            this.rbProducto.UseVisualStyleBackColor = true;
-            this.rbProducto.CheckedChanged += new System.EventHandler(this.rbProducto_CheckedChanged);
-            // 
-            // rbNotaCredito
-            // 
-            this.rbNotaCredito.AutoSize = true;
-            this.rbNotaCredito.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbNotaCredito.Location = new System.Drawing.Point(426, 247);
-            this.rbNotaCredito.Name = "rbNotaCredito";
-            this.rbNotaCredito.Size = new System.Drawing.Size(159, 28);
-            this.rbNotaCredito.TabIndex = 3;
-            this.rbNotaCredito.TabStop = true;
-            this.rbNotaCredito.Text = "Nota de Credito";
-            this.rbNotaCredito.UseVisualStyleBackColor = true;
-            this.rbNotaCredito.CheckedChanged += new System.EventHandler(this.rbNotaCredito_CheckedChanged);
-            // 
             // lblSalida
             // 
             this.lblSalida.AutoSize = true;
@@ -113,22 +90,22 @@ namespace LenCo.Vista
             this.txtProductoSale.Size = new System.Drawing.Size(200, 44);
             this.txtProductoSale.TabIndex = 5;
             // 
-            // button1
+            // btnHistorial
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(907, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(135, 36);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Historial";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnHistorial.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHistorial.Location = new System.Drawing.Point(907, 12);
+            this.btnHistorial.Name = "btnHistorial";
+            this.btnHistorial.Size = new System.Drawing.Size(135, 36);
+            this.btnHistorial.TabIndex = 6;
+            this.btnHistorial.Text = "Historial";
+            this.btnHistorial.UseVisualStyleBackColor = true;
             // 
             // btnConfirmar
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmar.Location = new System.Drawing.Point(258, 133);
+            this.btnConfirmar.Location = new System.Drawing.Point(350, 276);
             this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(265, 36);
+            this.btnConfirmar.Size = new System.Drawing.Size(104, 36);
             this.btnConfirmar.TabIndex = 7;
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
@@ -155,7 +132,12 @@ namespace LenCo.Vista
             // 
             // gbDetalle
             // 
-            this.gbDetalle.Controls.Add(this.listBox2);
+            this.gbDetalle.Controls.Add(this.label5);
+            this.gbDetalle.Controls.Add(this.txtDescripDevolucion);
+            this.gbDetalle.Controls.Add(this.lblRestante);
+            this.gbDetalle.Controls.Add(this.lblSaliente);
+            this.gbDetalle.Controls.Add(this.lblEntrante);
+            this.gbDetalle.Controls.Add(this.lstSaliente);
             this.gbDetalle.Controls.Add(this.lstEntrante);
             this.gbDetalle.Controls.Add(this.label4);
             this.gbDetalle.Controls.Add(this.label3);
@@ -163,9 +145,55 @@ namespace LenCo.Vista
             this.gbDetalle.Controls.Add(this.label2);
             this.gbDetalle.Location = new System.Drawing.Point(109, 290);
             this.gbDetalle.Name = "gbDetalle";
-            this.gbDetalle.Size = new System.Drawing.Size(781, 192);
+            this.gbDetalle.Size = new System.Drawing.Size(781, 319);
             this.gbDetalle.TabIndex = 11;
             this.gbDetalle.TabStop = false;
+            // 
+            // lblRestante
+            // 
+            this.lblRestante.AutoSize = true;
+            this.lblRestante.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRestante.Location = new System.Drawing.Point(438, 86);
+            this.lblRestante.Name = "lblRestante";
+            this.lblRestante.Size = new System.Drawing.Size(16, 20);
+            this.lblRestante.TabIndex = 19;
+            this.lblRestante.Text = "0";
+            // 
+            // lblSaliente
+            // 
+            this.lblSaliente.AutoSize = true;
+            this.lblSaliente.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaliente.Location = new System.Drawing.Point(438, 53);
+            this.lblSaliente.Name = "lblSaliente";
+            this.lblSaliente.Size = new System.Drawing.Size(16, 20);
+            this.lblSaliente.TabIndex = 18;
+            this.lblSaliente.Text = "0";
+            // 
+            // lblEntrante
+            // 
+            this.lblEntrante.AutoSize = true;
+            this.lblEntrante.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEntrante.Location = new System.Drawing.Point(438, 19);
+            this.lblEntrante.Name = "lblEntrante";
+            this.lblEntrante.Size = new System.Drawing.Size(16, 20);
+            this.lblEntrante.TabIndex = 17;
+            this.lblEntrante.Text = "0";
+            // 
+            // lstSaliente
+            // 
+            this.lstSaliente.FormattingEnabled = true;
+            this.lstSaliente.Location = new System.Drawing.Point(561, 22);
+            this.lstSaliente.Name = "lstSaliente";
+            this.lstSaliente.Size = new System.Drawing.Size(193, 147);
+            this.lstSaliente.TabIndex = 16;
+            // 
+            // lstEntrante
+            // 
+            this.lstEntrante.FormattingEnabled = true;
+            this.lstEntrante.Location = new System.Drawing.Point(21, 22);
+            this.lstEntrante.Name = "lstEntrante";
+            this.lstEntrante.Size = new System.Drawing.Size(193, 147);
+            this.lstEntrante.TabIndex = 15;
             // 
             // label4
             // 
@@ -217,22 +245,26 @@ namespace LenCo.Vista
             this.btnAñadirSalida.TabIndex = 13;
             this.btnAñadirSalida.Text = "+";
             this.btnAñadirSalida.UseVisualStyleBackColor = true;
+            this.btnAñadirSalida.Click += new System.EventHandler(this.btnAñadirSalida_Click);
             // 
-            // lstEntrante
+            // txtDescripDevolucion
             // 
-            this.lstEntrante.FormattingEnabled = true;
-            this.lstEntrante.Location = new System.Drawing.Point(21, 22);
-            this.lstEntrante.Name = "lstEntrante";
-            this.lstEntrante.Size = new System.Drawing.Size(193, 147);
-            this.lstEntrante.TabIndex = 15;
+            this.txtDescripDevolucion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescripDevolucion.Location = new System.Drawing.Point(220, 184);
+            this.txtDescripDevolucion.Multiline = true;
+            this.txtDescripDevolucion.Name = "txtDescripDevolucion";
+            this.txtDescripDevolucion.Size = new System.Drawing.Size(336, 86);
+            this.txtDescripDevolucion.TabIndex = 20;
             // 
-            // listBox2
+            // label5
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(561, 22);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(193, 147);
-            this.listBox2.TabIndex = 16;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(356, 162);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(66, 19);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Motivo:";
             // 
             // frmDevoluciones
             // 
@@ -244,11 +276,9 @@ namespace LenCo.Vista
             this.Controls.Add(this.gbDetalle);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCodigo);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnHistorial);
             this.Controls.Add(this.txtProductoSale);
             this.Controls.Add(this.lblSalida);
-            this.Controls.Add(this.rbNotaCredito);
-            this.Controls.Add(this.rbProducto);
             this.Controls.Add(this.txtProductoEntra);
             this.Controls.Add(this.lblEntrada);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -265,11 +295,9 @@ namespace LenCo.Vista
 
         private System.Windows.Forms.Label lblEntrada;
         private System.Windows.Forms.TextBox txtProductoEntra;
-        private System.Windows.Forms.RadioButton rbProducto;
-        private System.Windows.Forms.RadioButton rbNotaCredito;
         private System.Windows.Forms.Label lblSalida;
         private System.Windows.Forms.TextBox txtProductoSale;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnHistorial;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.Label label1;
@@ -279,7 +307,12 @@ namespace LenCo.Vista
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAñadirEntrada;
         private System.Windows.Forms.Button btnAñadirSalida;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lstSaliente;
         private System.Windows.Forms.ListBox lstEntrante;
+        private System.Windows.Forms.Label lblRestante;
+        private System.Windows.Forms.Label lblSaliente;
+        private System.Windows.Forms.Label lblEntrante;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtDescripDevolucion;
     }
 }

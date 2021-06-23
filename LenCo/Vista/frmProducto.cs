@@ -135,16 +135,18 @@ namespace LenCo
         {
             int stockN1 = Convert.ToInt32(txtStockN1.Text);
             int stockN2 = Convert.ToInt32(txtStockN2.Text);
+            int stockAlmacen = Convert.ToInt32(txtStockAlmacen.Text);
             int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID"].Value.ToString());
 
             Stock stockSucursal1 = new Stock(1, idProducto, stockN1);
             Stock stockSucural2 = new Stock(2, idProducto, stockN2);
+            Stock stockSucursal3 = new Stock(3, idProducto, stockAlmacen);
 
-            string vacioSuc = dgvProductos.CurrentRow.Cells["Negocio"].Value.ToString();
-            string vacioStock = dgvProductos.CurrentRow.Cells["Stock"].Value.ToString();
+            string sucVacio = dgvProductos.CurrentRow.Cells["Negocio"].Value.ToString();
+            string stockVacio = dgvProductos.CurrentRow.Cells["Stock"].Value.ToString();
 
             Gestor gestor = new Gestor();
-            if (string.IsNullOrEmpty(vacioStock) && string.IsNullOrEmpty(vacioSuc))
+            if (string.IsNullOrEmpty(stockVacio) && string.IsNullOrEmpty(sucVacio))
             {
                 gestor.cargarStocks(stockSucursal1);
                 gestor.cargarStocks(stockSucural2);
@@ -223,7 +225,7 @@ namespace LenCo
         private void cargarListas()
         {
             Gestor gestor = new Gestor();
-            string sql = "exec AllProducts"; // muestra todos los productos cargados en la BD tengan o no stock
+            string sql = "exec TodosLosProductosActivos"; // muestra todos los productos cargados en la BD tengan o no stock
 
             DataTable productos = gestor.mostrarConsulta(sql);
             dgvProductos.DataSource = productos;

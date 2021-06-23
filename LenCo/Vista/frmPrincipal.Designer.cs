@@ -79,7 +79,7 @@ namespace LenCo.Vista
             this.btnSalir.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalir.Image = ((System.Drawing.Image)(resources.GetObject("btnSalir.Image")));
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(52, 611);
+            this.btnSalir.Location = new System.Drawing.Point(55, 597);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(97, 35);
             this.btnSalir.TabIndex = 11;
@@ -177,7 +177,7 @@ namespace LenCo.Vista
             this.btnLogout.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.Image = ((System.Drawing.Image)(resources.GetObject("btnLogout.Image")));
             this.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogout.Location = new System.Drawing.Point(0, 569);
+            this.btnLogout.Location = new System.Drawing.Point(3, 555);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(210, 36);
             this.btnLogout.TabIndex = 9;
@@ -189,7 +189,7 @@ namespace LenCo.Vista
             // 
             this.lblUsuarioLog.AutoSize = true;
             this.lblUsuarioLog.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsuarioLog.Location = new System.Drawing.Point(31, 535);
+            this.lblUsuarioLog.Location = new System.Drawing.Point(31, 522);
             this.lblUsuarioLog.Name = "lblUsuarioLog";
             this.lblUsuarioLog.Size = new System.Drawing.Size(144, 18);
             this.lblUsuarioLog.TabIndex = 0;
