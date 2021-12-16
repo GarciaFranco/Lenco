@@ -23,48 +23,60 @@ namespace LenCo.Vista
         {
             Gestor gestor = new Gestor();
 
-            double cantidadIngresada = Convert.ToDouble(txtCantidad.Text);
-            double cantidadMaxima = Convert.ToDouble(lblMaxCant.Text);
 
-            if (cantidadIngresada <= cantidadMaxima)
+            bool campos_Completos = validarCarga();
+
+            if (campos_Completos)
             {
-                try
+                double cantidadIngresada = Convert.ToDouble(txtCantidad.Text);
+                double cantidadMaxima = Convert.ToDouble(lblMaxCant.Text);
+
+                if (cantidadIngresada <= cantidadMaxima)
                 {
-                    int cantidadDescontada = Convert.ToInt32(txtCantidad.Text);
-                    List<Producto> listaProductos = new List<Producto>();
-                    string codigo = txtCodigo.Text;
-
-                    Producto productoVenta = gestor.buscarProducto(codigo);
-                    listaProductos.Add(productoVenta);
-
-                    for (int i = 0; i < listaProductos.Count; i++)
+                    try
                     {
-                        dgvDetalleVenta.Rows.Add(productoVenta.pIdProducto, productoVenta.pArticulo.ToString(), productoVenta.pDescripcion,
-                                                 productoVenta.pMarca.pNombre, productoVenta.pRubro.pNombre,
-                                                 productoVenta.pTalle.pNombre, productoVenta.pColor.pNombre,
-                                                 productoVenta.pPrecioVenta.ToString(), cantidadDescontada);
+                        int cantidadDescontada = Convert.ToInt32(txtCantidad.Text);
+                        List<Producto> listaProductos = new List<Producto>();
+                        string codigo = txtCodigo.Text;
+
+                        Producto productoVenta = gestor.buscarProducto(codigo);
+                        listaProductos.Add(productoVenta);
+
+                        for (int i = 0; i < listaProductos.Count; i++)
+                        {
+                            dgvDetalleVenta.Rows.Add(productoVenta.pIdProducto, productoVenta.pArticulo.ToString(), productoVenta.pDescripcion,
+                                                     productoVenta.pMarca.pNombre, productoVenta.pRubro.pNombre,
+                                                     productoVenta.pTalle.pNombre, productoVenta.pColor.pNombre,
+                                                     productoVenta.pPrecioVenta.ToString(), cantidadDescontada);
+                        }
+
+                        if (lblMaxCant.Text == "0")
+                        {
+                            MessageBox.Show("No puedes agregar este producto.");
+                            limpiarCampos();
+                            txtCodigo.Focus();
+                        }
                     }
-
-                    if (lblMaxCant.Text == "0")
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("No puedes agregar este producto.");
+                        MessageBox.Show("Error en la carga del producto: " + ex.Message);
+                    }
+                    finally
+                    {
                         limpiarCampos();
-                        txtCodigo.Focus();
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error en la carga del producto: " + ex.Message);
-                }
-                finally
-                {
-                    limpiarCampos();
+                    MessageBox.Show("Debes ingresar una cantidad inferior a " + cantidadMaxima);
                 }
             }
             else
             {
-                MessageBox.Show("Debes ingresar una cantidad inferior a " + cantidadMaxima);
+                MessageBox.Show("Ambos campos son requeridos para cargar","Error");
             }
+
+            btnConfirmar.Enabled = false;
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)
@@ -72,6 +84,7 @@ namespace LenCo.Vista
             var fecha = DateTime.Now; // .Date.ToString("yyyy-MM-dd");
             Gestor gestor = new Gestor();
 
+  
             try
             {
                 Venta venta = new Venta();
@@ -303,7 +316,8 @@ namespace LenCo.Vista
         {
             Gestor gestor = new Gestor();
             DataTable dt = gestor.rankingProductosVendidos();
-            Form frmReporte = new frmReportesVentas(dt);
+            string titulo = "Ranking de productos mas vendidos en 2021";
+            Form frmReporte = new frmReportesVentas(dt,titulo);
             frmReporte.ShowDialog();
         }
 
@@ -311,7 +325,8 @@ namespace LenCo.Vista
         {
             Gestor gestor = new Gestor();
             DataTable dt = gestor.rankingRubros();
-            Form frmReporte = new frmReportesVentas(dt);
+            string titulo = "Ranking de rubros mas vendidos en 2021";
+            Form frmReporte = new frmReportesVentas(dt,titulo);
             frmReporte.ShowDialog();
         }
 
@@ -319,8 +334,49 @@ namespace LenCo.Vista
         {
             Gestor gestor = new Gestor();
             DataTable dt = gestor.rankingTallesCorpinios();
-            Form frmReporte = new frmReportesVentas(dt);
+            string titulo = "Talles de corpiños mas vendidos en 2021";
+            Form frmReporte = new frmReportesVentas(dt,titulo);
             frmReporte.ShowDialog();
+        }
+        private void func_soloNumeros(TextBox textbox)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingresa solo números enteros.");
+                textbox.Text = textbox.Text.Remove(textbox.Text.Length - 1);
+            }
+        }
+
+        private bool validarCarga()
+        {
+            if(string.IsNullOrEmpty(txtCodigo.Text) || string.IsNullOrEmpty(txtCantidad.Text))
+            {
+                return false;
+            }
+            return true;
+        }
+        private void txtDescuento_TextChanged(object sender, EventArgs e)
+        {
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtDescuento.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingresa solo números enteros.");
+                txtDescuento.Text = txtDescuento.Text.Remove(txtDescuento.Text.Length - 1);
+            }
+
+        }
+
+        private void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            func_soloNumeros(txtCantidad);
+        }
+
+        private void cbFormaPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbFormaPago.SelectedIndex != -1)
+            {
+                btnConfirmar.Enabled = true;
+            }
         }
     }
 }

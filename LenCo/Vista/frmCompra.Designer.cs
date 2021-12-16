@@ -61,6 +61,7 @@ namespace LenCo.Vista
             this.dgvCompras.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvCompras.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvCompras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCompras.GridColor = System.Drawing.SystemColors.Control;
             this.dgvCompras.Location = new System.Drawing.Point(30, 368);
             this.dgvCompras.MultiSelect = false;
             this.dgvCompras.Name = "dgvCompras";
@@ -78,6 +79,7 @@ namespace LenCo.Vista
             this.dgvDetalleCompra.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvDetalleCompra.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDetalleCompra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetalleCompra.GridColor = System.Drawing.SystemColors.Control;
             this.dgvDetalleCompra.Location = new System.Drawing.Point(456, 41);
             this.dgvDetalleCompra.MultiSelect = false;
             this.dgvDetalleCompra.Name = "dgvDetalleCompra";
@@ -184,6 +186,7 @@ namespace LenCo.Vista
             this.txtComprobante.Name = "txtComprobante";
             this.txtComprobante.Size = new System.Drawing.Size(143, 20);
             this.txtComprobante.TabIndex = 4;
+            this.txtComprobante.TextChanged += new System.EventHandler(this.txtComprobante_TextChanged);
             // 
             // cbProveedores
             // 

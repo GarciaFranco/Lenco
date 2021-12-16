@@ -99,16 +99,18 @@ namespace LenCo.Vista
                                 MessageBox.Show("El Producto con CODIGO : " + codigo + " no posee stock");
                             }
                         }
-                        if (montoRestante > 0)
-                        {
-                            MessageBox.Show("Entregar NOTA DE CREDITO [ID: " + idDevolucion + "] por: $ " + montoRestante);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Monto a abonar por el cliente: $" + montoRestante * (-1));
-                        }
+                    }
+                    if (montoRestante > 0)
+                    {
+                        MessageBox.Show("Entregar NOTA DE CREDITO [ID: " + idDevolucion + "] por: $ " + montoRestante);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Monto a abonar por el cliente: $" + montoRestante * (-1));
                     }
                     limpiarCampos();
+                    txtProductoEntra.Enabled = false;
+                    txtProductoSale.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -271,6 +273,13 @@ namespace LenCo.Vista
             txtProductoSale.Clear();
             lstEntrante.Items.Clear();
             lstSaliente.Items.Clear();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
+            txtProductoEntra.Enabled = false;
+            txtProductoSale.Enabled = false;
         }
     }
 }

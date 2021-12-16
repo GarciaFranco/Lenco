@@ -46,7 +46,7 @@ namespace LenCo.Vista
             lblTransacciones.Text = transacciones;
 
             string costo =
-                "La empresa Lenco podrá cobrar comisiones por el mantenimiento y / o uso de este Servicio o los que en el futuro implemente, entendiéndose facultado expresamente para " +
+                "La empresa GarcINC podrá cobrar comisiones por el mantenimiento y / o uso de este Servicio o los que en el futuro implemente, entendiéndose facultado expresamente para " +
                 "efectuar los correspondientes débitos en mis cuentas, aún en descubierto, por lo que presto para ello mi expresa conformidad. En " +
                 "caso de cualquier modificación a la presente previsión, lo comunicará con al menos 60 días de antelación. ";
             lblCosto.Text = costo;
@@ -71,7 +71,7 @@ namespace LenCo.Vista
             lblPropidad.Text = propIntelectual;
 
             string privacidad =
-    "Para utilizar los Servicios ofrecidos por Lenco, los Usuarios deberán facilitar determinados datos de carácter personal.Su información personal se procesa y almacena " +
+    "Para utilizar los Servicios ofrecidos por GarcINC, los Usuarios deberán facilitar determinados datos de carácter personal.Su información personal se procesa y almacena " +
     "en servidores o medios magnéticos que mantienen altos estándares de seguridad y protección tanto física como tecnológica. Para mayor información sobre la privacidad de " +
     "los Datos Personales y casos en los que será revelada la informaciónpersonal, se pueden consultar nuestras políticas de privacidad.";
             lblPrivacidad.Text = privacidad;

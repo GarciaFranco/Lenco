@@ -56,7 +56,7 @@ namespace LenCo.Vista
             // 
             // panelMenu
             // 
-            this.panelMenu.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.panelMenu.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.panelMenu.Controls.Add(this.lblTerminos);
             this.panelMenu.Controls.Add(this.btnSalir);
             this.panelMenu.Controls.Add(this.panelSubMenu);
@@ -87,7 +87,7 @@ namespace LenCo.Vista
             // 
             // btnSalir
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnSalir.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnSalir.FlatAppearance.BorderSize = 0;
             this.btnSalir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -105,7 +105,7 @@ namespace LenCo.Vista
             // 
             // panelSubMenu
             // 
-            this.panelSubMenu.BackColor = System.Drawing.Color.Gray;
+            this.panelSubMenu.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.panelSubMenu.Controls.Add(this.btnAdmCompras);
             this.panelSubMenu.Controls.Add(this.btnAdmProductos);
             this.panelSubMenu.Controls.Add(this.btnAdmDevoluc);
@@ -117,15 +117,15 @@ namespace LenCo.Vista
             // 
             // btnAdmCompras
             // 
-            this.btnAdmCompras.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAdmCompras.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnAdmCompras.FlatAppearance.BorderSize = 0;
             this.btnAdmCompras.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnAdmCompras.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmCompras.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmCompras.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAdmCompras.Location = new System.Drawing.Point(3, 52);
+            this.btnAdmCompras.Location = new System.Drawing.Point(0, 52);
             this.btnAdmCompras.Name = "btnAdmCompras";
-            this.btnAdmCompras.Size = new System.Drawing.Size(144, 26);
+            this.btnAdmCompras.Size = new System.Drawing.Size(147, 26);
             this.btnAdmCompras.TabIndex = 13;
             this.btnAdmCompras.Text = "Compras";
             this.btnAdmCompras.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -134,15 +134,15 @@ namespace LenCo.Vista
             // 
             // btnAdmProductos
             // 
-            this.btnAdmProductos.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAdmProductos.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnAdmProductos.FlatAppearance.BorderSize = 0;
             this.btnAdmProductos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnAdmProductos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmProductos.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmProductos.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAdmProductos.Location = new System.Drawing.Point(3, 0);
+            this.btnAdmProductos.Location = new System.Drawing.Point(0, 0);
             this.btnAdmProductos.Name = "btnAdmProductos";
-            this.btnAdmProductos.Size = new System.Drawing.Size(144, 26);
+            this.btnAdmProductos.Size = new System.Drawing.Size(147, 26);
             this.btnAdmProductos.TabIndex = 10;
             this.btnAdmProductos.Text = "Productos";
             this.btnAdmProductos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -151,15 +151,15 @@ namespace LenCo.Vista
             // 
             // btnAdmDevoluc
             // 
-            this.btnAdmDevoluc.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAdmDevoluc.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnAdmDevoluc.FlatAppearance.BorderSize = 0;
             this.btnAdmDevoluc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnAdmDevoluc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmDevoluc.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmDevoluc.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAdmDevoluc.Location = new System.Drawing.Point(3, 78);
+            this.btnAdmDevoluc.Location = new System.Drawing.Point(0, 78);
             this.btnAdmDevoluc.Name = "btnAdmDevoluc";
-            this.btnAdmDevoluc.Size = new System.Drawing.Size(144, 26);
+            this.btnAdmDevoluc.Size = new System.Drawing.Size(147, 26);
             this.btnAdmDevoluc.TabIndex = 12;
             this.btnAdmDevoluc.Text = "Devoluciones";
             this.btnAdmDevoluc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -168,15 +168,15 @@ namespace LenCo.Vista
             // 
             // btnAdmVentas
             // 
-            this.btnAdmVentas.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAdmVentas.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnAdmVentas.FlatAppearance.BorderSize = 0;
             this.btnAdmVentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnAdmVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdmVentas.Font = new System.Drawing.Font("Rockwell", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmVentas.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnAdmVentas.Location = new System.Drawing.Point(3, 26);
+            this.btnAdmVentas.Location = new System.Drawing.Point(0, 26);
             this.btnAdmVentas.Name = "btnAdmVentas";
-            this.btnAdmVentas.Size = new System.Drawing.Size(144, 26);
+            this.btnAdmVentas.Size = new System.Drawing.Size(147, 26);
             this.btnAdmVentas.TabIndex = 11;
             this.btnAdmVentas.Text = "Ventas";
             this.btnAdmVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -185,7 +185,7 @@ namespace LenCo.Vista
             // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnLogout.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -212,7 +212,7 @@ namespace LenCo.Vista
             // 
             // btnAdmin
             // 
-            this.btnAdmin.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnAdmin.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAdmin.FlatAppearance.BorderSize = 0;
             this.btnAdmin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
@@ -239,7 +239,7 @@ namespace LenCo.Vista
             // 
             // btnDevoluc
             // 
-            this.btnDevoluc.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnDevoluc.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnDevoluc.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDevoluc.FlatAppearance.BorderSize = 0;
             this.btnDevoluc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
@@ -257,7 +257,7 @@ namespace LenCo.Vista
             // 
             // btnVentas
             // 
-            this.btnVentas.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnVentas.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnVentas.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnVentas.FlatAppearance.BorderSize = 0;
             this.btnVentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
@@ -275,7 +275,7 @@ namespace LenCo.Vista
             // 
             // btnProductos
             // 
-            this.btnProductos.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.btnProductos.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnProductos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnProductos.FlatAppearance.BorderSize = 0;
             this.btnProductos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightGray;
@@ -301,7 +301,6 @@ namespace LenCo.Vista
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1070, 660);

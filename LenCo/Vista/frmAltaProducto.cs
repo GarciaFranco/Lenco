@@ -80,5 +80,33 @@ namespace LenCo.Vista
         {
             this.Hide();
         }
+
+        private void txtArticulo_TextChanged(object sender, EventArgs e)
+        {
+            func_soloNumeros(txtArticulo);
+        }
+        private void func_soloNumeros(TextBox textbox)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingresa solo números enteros.");
+                textbox.Text = textbox.Text.Remove(textbox.Text.Length - 1);
+            }
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+            (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

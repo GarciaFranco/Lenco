@@ -77,6 +77,7 @@ namespace LenCo.Vista
             this.dgvDetalleVenta.AllowUserToDeleteRows = false;
             this.dgvDetalleVenta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDetalleVenta.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvDetalleVenta.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvDetalleVenta.ColumnHeadersHeight = 30;
             this.dgvDetalleVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDetalleVenta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -198,7 +199,7 @@ namespace LenCo.Vista
             // 
             // btnCargar
             // 
-            this.btnCargar.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnCargar.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnCargar.FlatAppearance.BorderSize = 0;
             this.btnCargar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -218,6 +219,7 @@ namespace LenCo.Vista
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(38, 24);
             this.txtCantidad.TabIndex = 99;
+            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
             this.txtCantidad.Enter += new System.EventHandler(this.txtCantidad_Enter);
             // 
             // label3
@@ -265,6 +267,7 @@ namespace LenCo.Vista
             this.dgvVentasDiarias.AllowUserToResizeColumns = false;
             this.dgvVentasDiarias.AllowUserToResizeRows = false;
             this.dgvVentasDiarias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvVentasDiarias.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvVentasDiarias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVentasDiarias.Location = new System.Drawing.Point(31, 314);
             this.dgvVentasDiarias.MultiSelect = false;
@@ -285,17 +288,17 @@ namespace LenCo.Vista
             // 
             // btnConfirmar
             // 
-            this.btnConfirmar.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnConfirmar.BackColor = System.Drawing.Color.Green;
             this.btnConfirmar.FlatAppearance.BorderSize = 0;
             this.btnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirmar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnConfirmar.Location = new System.Drawing.Point(835, 25);
+            this.btnConfirmar.Location = new System.Drawing.Point(782, 21);
             this.btnConfirmar.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(110, 28);
+            this.btnConfirmar.Size = new System.Drawing.Size(164, 35);
             this.btnConfirmar.TabIndex = 89;
-            this.btnConfirmar.Text = "Confirmar Venta";
+            this.btnConfirmar.Text = "CONFIRMAR VENTA";
             this.btnConfirmar.UseVisualStyleBackColor = false;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
@@ -317,7 +320,7 @@ namespace LenCo.Vista
             // 
             // btnEliminar
             // 
-            this.btnEliminar.BackColor = System.Drawing.Color.OrangeRed;
+            this.btnEliminar.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnEliminar.FlatAppearance.BorderSize = 0;
             this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -366,6 +369,7 @@ namespace LenCo.Vista
             this.cbFormaPago.Name = "cbFormaPago";
             this.cbFormaPago.Size = new System.Drawing.Size(181, 28);
             this.cbFormaPago.TabIndex = 98;
+            this.cbFormaPago.SelectedIndexChanged += new System.EventHandler(this.cbFormaPago_SelectedIndexChanged);
             // 
             // chkDescuento
             // 
@@ -384,6 +388,7 @@ namespace LenCo.Vista
             this.txtDescuento.Name = "txtDescuento";
             this.txtDescuento.Size = new System.Drawing.Size(45, 26);
             this.txtDescuento.TabIndex = 96;
+            this.txtDescuento.TextChanged += new System.EventHandler(this.txtDescuento_TextChanged);
             // 
             // lblDescuento
             // 
@@ -421,7 +426,7 @@ namespace LenCo.Vista
             // 
             // btnReporte1
             // 
-            this.btnReporte1.BackColor = System.Drawing.Color.Crimson;
+            this.btnReporte1.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnReporte1.FlatAppearance.BorderSize = 0;
             this.btnReporte1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporte1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -437,7 +442,7 @@ namespace LenCo.Vista
             // 
             // btnReporte2
             // 
-            this.btnReporte2.BackColor = System.Drawing.Color.Crimson;
+            this.btnReporte2.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnReporte2.FlatAppearance.BorderSize = 0;
             this.btnReporte2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporte2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -453,7 +458,7 @@ namespace LenCo.Vista
             // 
             // btnReporte3
             // 
-            this.btnReporte3.BackColor = System.Drawing.Color.Crimson;
+            this.btnReporte3.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnReporte3.FlatAppearance.BorderSize = 0;
             this.btnReporte3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReporte3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

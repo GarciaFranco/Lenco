@@ -121,6 +121,7 @@ namespace LenCo.Vista
             this.Descripcion,
             this.Cantidad,
             this.Precio});
+            this.dgvDetalleCompra.GridColor = System.Drawing.SystemColors.Control;
             this.dgvDetalleCompra.Location = new System.Drawing.Point(50, 202);
             this.dgvDetalleCompra.MultiSelect = false;
             this.dgvDetalleCompra.Name = "dgvDetalleCompra";
@@ -185,6 +186,7 @@ namespace LenCo.Vista
             this.dgvProductosAlDetalle.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvProductosAlDetalle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvProductosAlDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvProductosAlDetalle.GridColor = System.Drawing.SystemColors.Control;
             this.dgvProductosAlDetalle.Location = new System.Drawing.Point(444, 37);
             this.dgvProductosAlDetalle.MultiSelect = false;
             this.dgvProductosAlDetalle.Name = "dgvProductosAlDetalle";
@@ -241,6 +243,7 @@ namespace LenCo.Vista
             this.txtPrecioCompra.Name = "txtPrecioCompra";
             this.txtPrecioCompra.Size = new System.Drawing.Size(68, 22);
             this.txtPrecioCompra.TabIndex = 107;
+            this.txtPrecioCompra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecioCompra_KeyPress);
             // 
             // label11
             // 
@@ -276,12 +279,12 @@ namespace LenCo.Vista
             // lblError
             // 
             this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblError.ForeColor = System.Drawing.Color.Red;
             this.lblError.Location = new System.Drawing.Point(7, 119);
             this.lblError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(325, 15);
+            this.lblError.Size = new System.Drawing.Size(352, 16);
             this.lblError.TabIndex = 102;
             this.lblError.Text = "No se obtuvo ningun resultado. Desea agregarlo?";
             // 
@@ -294,7 +297,7 @@ namespace LenCo.Vista
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(177, 16);
             this.label1.TabIndex = 101;
-            this.label1.Text = "Resultados de la busqueda:";
+            this.label1.Text = "Resultados de la búsqueda:";
             // 
             // label2
             // 
@@ -369,7 +372,7 @@ namespace LenCo.Vista
             this.btnCargar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCargar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnCargar.Location = new System.Drawing.Point(340, 116);
+            this.btnCargar.Location = new System.Drawing.Point(163, 139);
             this.btnCargar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCargar.Name = "btnCargar";
             this.btnCargar.Size = new System.Drawing.Size(62, 22);

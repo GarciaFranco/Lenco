@@ -100,5 +100,19 @@ namespace LenCo.Vista
             txtComprobante.Clear();
             cbProveedores.SelectedIndex = -1;
         }
+
+        private void func_soloNumeros(TextBox textbox)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingresa solo números enteros.");
+                textbox.Text = textbox.Text.Remove(textbox.Text.Length - 1);
+            }
+        }
+
+        private void txtComprobante_TextChanged(object sender, EventArgs e)
+        {
+            func_soloNumeros(txtComprobante);
+        }
     }
 }

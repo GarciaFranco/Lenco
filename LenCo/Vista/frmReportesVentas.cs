@@ -12,10 +12,11 @@ namespace LenCo.Vista
 {
     public partial class frmReportesVentas : Form
     {
-        public frmReportesVentas(DataTable dt)
+        public frmReportesVentas(DataTable dt,string titulo)
         {
             InitializeComponent();
             dgvReporte.DataSource = dt;
+            lblTituloReporte.Text = titulo;
         }
     }
 }

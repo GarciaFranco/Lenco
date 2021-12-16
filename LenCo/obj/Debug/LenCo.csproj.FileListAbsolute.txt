@@ -102,3 +102,32 @@ C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmReportesVenta
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmDevoluciones.resources
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmReportesVentas.resources
 D:\TUP UTN - Facultad\PS\LenCo\LenCo\obj\Debug\LenCo.Vista.frmTerminosyCond.resources
+D:\LenCo\LenCo\bin\Debug\LenCo.exe.config
+D:\LenCo\LenCo\bin\Debug\LenCo.exe
+D:\LenCo\LenCo\bin\Debug\LenCo.pdb
+D:\LenCo\LenCo\bin\Debug\System.Configuration.ConfigurationManager.dll
+D:\LenCo\LenCo\bin\Debug\System.Security.AccessControl.dll
+D:\LenCo\LenCo\bin\Debug\System.Security.Permissions.dll
+D:\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.dll
+D:\LenCo\LenCo\bin\Debug\System.Configuration.ConfigurationManager.xml
+D:\LenCo\LenCo\bin\Debug\System.Security.AccessControl.xml
+D:\LenCo\LenCo\bin\Debug\System.Security.Permissions.xml
+D:\LenCo\LenCo\bin\Debug\System.Security.Principal.Windows.xml
+D:\LenCo\LenCo\obj\Debug\LenCo.csprojAssemblyReference.cache
+D:\LenCo\LenCo\obj\Debug\LenCo.Vista.frmDevoluciones.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.Vista.frmReportesVentas.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.Vista.frmTerminosyCond.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.Vista.frmVenta.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.Vista.frmAltaProducto.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.Vista.frmCompra.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.Vista.frmDetalleCompra.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.frmLogin.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.Vista.frmPrincipal.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.frmProducto.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.Properties.Resources.resources
+D:\LenCo\LenCo\obj\Debug\LenCo.csproj.GenerateResource.cache
+D:\LenCo\LenCo\obj\Debug\LenCo.csproj.CoreCompileInputs.cache
+D:\LenCo\LenCo\obj\Debug\LenCo.csproj.CopyComplete
+D:\LenCo\LenCo\obj\Debug\LenCo.exe
+D:\LenCo\LenCo\obj\Debug\LenCo.pdb
+C:\Users\Franco\Desktop\Tesis\LenCo\LenCo\obj\Debug\LenCo.Vista.frmTerminosyCond.resources

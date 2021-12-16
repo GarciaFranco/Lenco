@@ -328,6 +328,56 @@ namespace LenCo
             return prod;
         }
 
+        public Producto buscadorProducto(string textoBusqueda)
+        {
+            Producto prod = null;
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"SELECT pd.idProducto 'ID', pd.articulo 'Articulo', pd.descripcion 'Descripcion', m.nombre 'Marca', r.nombre 'Rubro', t.nombre 'Talle', c.nombre 'Color',  p.nombre 'Presentacion',  precioVenta 'Precio Venta'
+                                        FROM Productos pd
+                                        JOIN Marcas m ON pd.idMarca = m.idMarca
+                                        JOIN Rubros r ON pd.idRubro = r.idRubro
+                                        JOIN Talles t ON pd.idTalle = t.idTalle
+                                        JOIN Colores c ON pd.idColor = c.idColor
+                                        JOIN Presentaciones p ON pd.idPresentacion = p.idPresentacion
+                                        WHERE pd.descripcion LIKE '%" + textoBusqueda + "%'";
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = consulta;
+
+                abrirConexion();
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    if (dr.Read())
+                    {
+                        Producto p = new Producto();
+                        p.pIdProducto = dr.GetInt32(0);
+                        p.pArticulo = dr.GetInt32(1);
+                        p.pDescripcion = dr.GetString(2);
+                        p.pMarca.pNombre = dr.GetString(3);
+                        p.pRubro.pNombre = dr.GetString(4);
+                        p.pTalle.pNombre = dr.GetString(5);
+                        p.pColor.pNombre = dr.GetString(6);
+                        p.pPresent.pNombre = dr.GetString(7);
+                        p.pPrecioVenta = (double)dr.GetDecimal(8);
+                        prod = p;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            return prod;
+        }
+
+
         public bool existeProducto(string codigo)
         {
             bool existe = false;
@@ -1202,7 +1252,7 @@ namespace LenCo
             {
                 abrirConexion();
 
-                string consulta = @"SELECT co.num_comprobante 'N° Comprobante', co.fecha_compra 'Fecha', pr.nombre 'Proveedor', CAST(SUM(dc.cantidadUnit*dc.precioUnit) AS DECIMAL(8,2)) 'Total de la compra'
+                string consulta = @"SELECT co.num_comprobante 'N° Comprobante', co.fecha_compra 'Fecha', pr.nombre 'Proveedor', CAST(SUM(dc.cantidadUnit*dc.precioUnit) AS DECIMAL(10,2)) 'Total de la compra'
                                     FROM Compras co
                                     JOIN DetallesCompra dc ON co.idCompra = dc.idCompra
                                     JOIN Proveedores pr ON pr.idProveedor = co.idProveedor
@@ -1233,7 +1283,7 @@ namespace LenCo
             {
                 abrirConexion();
 
-                string consulta = @"SELECT pd.articulo 'Articulo', pd.descripcion 'Descripcion', dc.cantidadUnit 'Cantidad', CAST ((dc.precioUnit) AS decimal(8,2)) 'Precio', CAST ((dc.cantidadUnit * dc.precioUnit) AS decimal(6,2)) 'Subtotal'
+                string consulta = @"SELECT pd.articulo 'Articulo', pd.descripcion 'Descripcion', dc.cantidadUnit 'Cantidad', CAST ((dc.precioUnit) AS decimal(8,2)) 'Precio', CAST ((dc.cantidadUnit * dc.precioUnit) AS decimal(8,2)) 'Subtotal'
                                     FROM Productos pd
                                     JOIN DetallesCompra dc ON pd.idProducto = dc.idProducto
                                     JOIN Compras c ON c.idCompra = dc.idCompra

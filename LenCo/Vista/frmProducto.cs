@@ -36,7 +36,7 @@ namespace LenCo
             }
             else
             {
-                msg("Debes seleccionar una fila para modificar.");
+                msg("Debes seleccionar una fila para modificar.", "Information");
             }
         }
 
@@ -99,7 +99,8 @@ namespace LenCo
             }
             catch (Exception ex)
             {
-                msg("Hubo un error: " + ex);
+                msg("No se pudo realizar la acción, verifique que todos los campos esten bien cargados.", "Error");
+                Console.WriteLine("Hubo un error: " + ex);
             }
         }
 
@@ -107,7 +108,7 @@ namespace LenCo
         {
             if (dgvProductos.SelectedRows.Count > 0)
             {
-                if (MessageBox.Show("Estas seguro de desea eliminar este producto? Esta accion no se podra deshacer", "warning",
+                if (MessageBox.Show("Estas seguro de desea eliminar este producto? Esta accion no se podra deshacer", "Confirmar eliminación",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     Gestor gestor = new Gestor();
@@ -121,7 +122,8 @@ namespace LenCo
                     }
                     catch (Exception ex)
                     {
-                        msg("Hubo un error al eliminar el producto: " + ex);
+                        msg("Hubo un error al eliminar el producto", "Error");
+                        Console.WriteLine("Hubo un error al eliminar el producto: " + ex);
                     }
                 }
             }
@@ -133,34 +135,99 @@ namespace LenCo
 
         private void btnCargarStock_Click(object sender, EventArgs e)
         {
-            int stockN1 = Convert.ToInt32(txtStockN1.Text);
-            int stockN2 = Convert.ToInt32(txtStockN2.Text);
-            int stockAlmacen = Convert.ToInt32(txtStockAlmacen.Text);
-            int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID"].Value.ToString());
 
-            Stock stockSucursal1 = new Stock(1, idProducto, stockN1);
-            Stock stockSucural2 = new Stock(2, idProducto, stockN2);
-            Stock stockSucursal3 = new Stock(3, idProducto, stockAlmacen);
+            try
+            {
+                int stockN1 = Convert.ToInt32(txtStockN1.Text);
+                int stockN2 = Convert.ToInt32(txtStockN2.Text);
+                int stockAlmacen = Convert.ToInt32(txtStockAlmacen.Text);
+                int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["ID"].Value.ToString());
 
-            string sucVacio = dgvProductos.CurrentRow.Cells["Negocio"].Value.ToString();
-            string stockVacio = dgvProductos.CurrentRow.Cells["Stock"].Value.ToString();
+                Stock stockSucursal1 = new Stock(1, idProducto, stockN1);
+                Stock stockSucural2 = new Stock(2, idProducto, stockN2);
+                Stock stockSucursal3 = new Stock(3, idProducto, stockAlmacen);
+
+                string sucVacio = dgvProductos.CurrentRow.Cells["Cod Producto"].Value.ToString();
+
+                Gestor gestor = new Gestor();
+
+                int band_suc1 = gestor.verStock(sucVacio, 1);
+                int band_suc2 = gestor.verStock(sucVacio, 2);
+
+
+                if (band_suc1 == 0 && band_suc2 == 0)
+                {
+                    gestor.cargarStocks(stockSucursal1);
+                    gestor.cargarStocks(stockSucural2);
+                    limpiar();
+                }
+                else
+                {
+                    gestor.modificarStock(stockSucursal1);
+                    gestor.modificarStock(stockSucural2);
+                    gestor.modificarStock(stockSucursal3);
+                    limpiar();
+                }
+                cargarListas();
+                gbProducto.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                msg("No se pudo realizar la modificación del stock. Verifique que no haya campos vacios", "Error");
+                Console.WriteLine("Hubo un error al gestionar stock" + ex.Message);
+            }
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string texto_aBuscar = txtBusqueda.Text;
 
             Gestor gestor = new Gestor();
-            if (string.IsNullOrEmpty(stockVacio) && string.IsNullOrEmpty(sucVacio))
+
+            Producto resultado = gestor.buscadorProducto(texto_aBuscar);
+                        
+
+            if(resultado != null)
             {
-                gestor.cargarStocks(stockSucursal1);
-                gestor.cargarStocks(stockSucural2);
-                limpiar();
+
+                string query = @"SELECT p.idProducto 'ID', p.codigoProv 'Cod Producto', r.idRubro 'Rubro', m.nombre 'Marca', p.articulo 'Articulo', t.idTalle 'Talle', 
+                                        pr.nombre 'Presentacion', c.idColor 'Color', CAST((p.precioVenta) AS decimal(7,2)) 'Precio', inv.cantidad 'Stock', suc.nombre 'Negocio'
+                                FROM Productos p 
+                                JOIN Marcas m ON p.idMarca = m.idMarca 
+                                JOIN Presentaciones pr ON p.idPresentacion = pr.idPresentacion
+                                JOIN Talles t ON p.idTalle = t.idTalle
+                                JOIN Colores c ON p.idColor = c.idColor
+                                JOIN Rubros r ON p.idRubro = r.idRubro
+                                LEFT JOIN Inventarios inv ON p.idProducto = inv.idProducto
+                                LEFT JOIN Sucursales suc ON inv.idSucursal = suc.idSucursal
+                                WHERE descripcion LIKE '%" + texto_aBuscar + "%'";
+                DataTable producto = gestor.mostrarConsulta(query);
+                dgvProductos.DataSource = producto;
+
             }
-            else
-            {
-                gestor.modificarStock(stockSucursal1);
-                gestor.modificarStock(stockSucural2);
-                gestor.modificarStock(stockSucursal3);
-                limpiar();
-            }
-            cargarListas();
-            gbProducto.Visible = false;
+
+        }
+
+
+        private void txtArticulo_TextChanged(object sender, EventArgs e)
+        {
+            func_soloNumeros(txtArticulo);
+        }
+
+        private void txtStockAlmacen_TextChanged(object sender, EventArgs e)
+        {
+            func_soloNumeros(txtStockAlmacen);
+        }
+
+        private void txtStockN1_TextChanged(object sender, EventArgs e)
+        {
+            func_soloNumeros(txtStockN1);
+        }
+
+        private void txtStockN2_TextChanged(object sender, EventArgs e)
+        {
+            func_soloNumeros(txtStockN2);
         }
 
         private void limpiar()
@@ -261,9 +328,37 @@ namespace LenCo
             MessageBox.Show(msg);
         }
 
+        private void msg(string msg, string icon)
+        {
+            if (icon == "Error") {
+                MessageBox.Show(msg, icon,
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (icon == "Warning")
+            {
+                MessageBox.Show(msg, icon,
+                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (icon == "Information")
+            {
+                MessageBox.Show(msg, icon,
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void func_soloNumeros(TextBox textbox)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textbox.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Ingresa solo números enteros.");
+                textbox.Text = textbox.Text.Remove(textbox.Text.Length - 1);
+            }
+        }
+
+
         /* BOTON MODIFICAR ELIMINADO.
-         * REALIZAR GESTIONAMIENTO DE STOCK DESDE EL BOTON MODIFICAR
-         * CONSULTAR STOCK DEL PRODUCTO */
+* REALIZAR GESTIONAMIENTO DE STOCK DESDE EL BOTON MODIFICAR
+* CONSULTAR STOCK DEL PRODUCTO */
 
         //private void btnEditarStock_Click(object sender, EventArgs e)
         //{

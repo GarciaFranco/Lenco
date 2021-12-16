@@ -283,6 +283,7 @@ namespace LenCo.Vista
             this.txtArticulo.Name = "txtArticulo";
             this.txtArticulo.Size = new System.Drawing.Size(116, 22);
             this.txtArticulo.TabIndex = 65;
+            this.txtArticulo.TextChanged += new System.EventHandler(this.txtArticulo_TextChanged);
             // 
             // txtPrecio
             // 
@@ -292,6 +293,7 @@ namespace LenCo.Vista
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(116, 22);
             this.txtPrecio.TabIndex = 76;
+            this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
             // 
             // cbRubro
             // 
